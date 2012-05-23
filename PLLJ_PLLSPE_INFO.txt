@@ -1,0 +1,5 @@
+PLL_Name	IF_SYNTH:comb_4|IF_CLK:comb_10|altpll:altpll_component|IF_CLK_altpll:auto_generated|pll1
+PLLJITTER	30
+PLLSPEmax	84
+PLLSPEmin	-53
+
