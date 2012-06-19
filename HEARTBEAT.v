@@ -8,18 +8,19 @@
 //  Copyright Lee Szuba 2012
 //=======================================================
 
-module HEARTBEAT( clk, beat_out );
-	// Main device clock
-	input clk;
-	output beat_out;
+module HEARTBEAT( input clk,
+						output beat_out );
 	
-	parameter clk_div = 50000000;
-	
-	// Binary counter, 32 bits wide
+	reg beat;
 	reg [31:0] counter;
-	always @(posedge clk) if(counter==clk_div) counter <= 0; else counter <= counter+1;
+	
+	parameter CLK_DIV = 50000000;
+	
+	always @(posedge clk) if(counter==CLK_DIV) counter <= 0; else counter <= counter+1;
 	
 	// Divide by 2 to give a 50 percent duty cycle
-	always @(posedge clk) if(counter==clk_div) beat_out <= ~beat_out;
+	always @(posedge clk) if(counter==CLK_DIV) beat <= ~beat;
+	
+	assign beat_out = beat;
 
 endmodule

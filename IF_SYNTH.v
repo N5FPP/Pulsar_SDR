@@ -8,44 +8,159 @@
 //=======================================================
 
 
-module IF_SYNTH( clk, quad_out, if_freq, pll_freq_strobe, locked );
-	// Main device clock, operating at 50MHz
-	input clk;
-	
-	
+module IF_SYNTH( input clk,
+				 output [3:0] quad_out,
+				 input  [8:0] if_freq,
+				 input  freq_strobe,
+				 output locked );
+	// clk
+	// Main system clock
+	//
+	// quad_out
 	// Output of quadrature signal to analog switches
 	// used to sample radio signal
-	//
 	// 1-4 demultiplexed signal
 	// with one output active at a time
 	// and 90 degree out of phase signals at 1/4
 	// of the pll clock frequency
-	output [3:0] quad_out;
-	
-	
-	// 16 bit number representing the input frequency
-	// Format of the number still to be decided
-	input [15:0] if_freq;
-	
+	//
+	// if_freq
+	// Desired if output frequency
+	//
+	// freq_strobe
 	// Input to command the PLL to switch frequencies
-	input pll_freq_strobe;
-	
-	// Signal to show when the PLL is locked to it's
-	// target frequency
-	output pll_lock;
+	//
+	// locked
+	// Output signalling the PLL is reconfigured and locked
+
+
+
  	
 	// PLL synthesized variable frequency clock
-	wire if_clk_signal;
-	
-	wire pll_areset,
-		  pll_configupdate,
-		  pll_scanclk,
-		  pll_scanclkena,
-		  pll_scandata,
-		  pll_scandataout,
-		  pll_scandone;
+	wire lo_clk_signal;
 		  
 	wire busy;
+	reg pll_reset, write_param, reconfig;
+	wire [8:0] data_in;
+
+	wire pll_lock;
+	assign locked = (~busy & pll_lock & (!state));
+
+	reg [3:0] state;
+	reg strobe_latch;
+
+
+	always @(posedge clk)
+		case(state)
+			0: 	begin
+					pll_reset <= 1'b0;
+					write_param <= 1'b0;
+					reconfig <= 1'b0;
+					if(freq_strobe)
+						begin
+							state <= 1;
+							//strobe_latch <= 1'b0;
+						end
+					else
+						begin
+							state <= 0;
+							//strobe_latch <= 1'b0;
+						end
+				end
+			1:  begin
+					//if(freq_strobe) strobe_latch <= 1'b1;
+					pll_reset <= 1'b0;
+					write_param <= 1'b0;
+					reconfig <= 1'b0;
+					state <= 2;
+				end
+			2:	begin
+					//if(freq_strobe) strobe_latch <= 1'b1;
+					pll_reset <= 1'b0;
+					write_param <= 1'b1;
+					reconfig <= 1'b0;
+					state <= 3;
+				end
+			3:	begin
+					//if(freq_strobe) strobe_latch <= 1'b1;
+					pll_reset <= 1'b0;
+					write_param <= 1'b0;
+					reconfig <= 1'b0;
+					if(!busy) state <= 4; else state <= 3;
+				end
+			4:	begin
+					//if(freq_strobe) strobe_latch <= 1'b1;
+					pll_reset <= 1'b0;
+					write_param <= 1'b0;
+					reconfig <= 1'b1;
+					state <= 5;
+				end
+			5:	begin
+					//if(freq_strobe) strobe_latch <= 1'b1;
+					pll_reset <= 1'b0;
+					write_param <= 1'b0;
+					reconfig <= 1'b0;
+					if(!busy) state <= 6; else state <= 5;
+				end
+			6:	begin
+					//if(freq_strobe) strobe_latch <= 1'b1;
+					pll_reset <= 1'b1;
+					write_param <= 1'b0;
+					reconfig <= 1'b0;
+					state <= 0;
+				end
+			default: begin
+					pll_reset <= 1'b0;
+					write_param <= 1'b0;
+					reconfig <= 1'b0;
+					state <= 0;
+				end
+		endcase
+
+
+
+	wire pll_areset,
+		 pll_configupdate,
+		 pll_scanclk,
+		 pll_scanclkena,
+		 pll_scandata,
+		 pll_scandataout,
+		 pll_scandone;
+
+	wire [2:0] counter_param = 3'b111; //Nominal division ratio setting
+	wire [3:0] counter_type = 4'b0001; //M (loop) counter
+
+	PLL_CONFIG pll_config( 
+					.busy(busy),
+					.clock(clk), //Main system clock
+					.counter_param(counter_param),
+					.counter_type(counter_type),
+					.data_in(if_freq),
+					.pll_areset(pll_areset),       
+					.pll_areset_in(pll_reset), //PLL reset
+					.pll_configupdate(pll_configupdate),
+					.pll_scanclk(pll_scanclk),
+					.pll_scanclkena(pll_scanclkena),
+					.pll_scandata(pll_scandata),
+					.pll_scandataout(pll_scandataout),
+					.pll_scandone(pll_scandone),
+					.reconfig(reconfig),
+					.write_param(write_param) );
+	
+	// PLL module
+	IF_CLK lo_a( 
+			  .areset(pll_areset),
+			  .configupdate(pll_configupdate),
+			  .inclk0(clk), //PLL input clock, main system clock
+			  .scanclk(pll_scanclk),
+			  .scanclkena(pll_scanclkena),
+			  .scandata(pll_scandata),
+			  .c0(lo_clk_signal), //PLL output signal
+			  .locked(pll_lock),
+			  .scandataout(pll_scandataout),
+			  .scandone(pll_scandone) );
+
+	
 	
 	// This code implements a two bit binary counter and
    // a 1-4 demultiplexer used to create intermediate
@@ -58,44 +173,8 @@ module IF_SYNTH( clk, quad_out, if_freq, pll_freq_strobe, locked );
 	
 	// Binary counter, 2 bits wide
 	reg [1:0] counter;
-	always @(posedge if_clk_signal) counter <= counter+1;
+	always @(posedge lo_clk_signal) counter <= counter + 1'b1;
 	// 2-4 demultiplexer
-	assign quad_out = (1 << counter);
-
-	assign locked = (busy & pll_lock);
-	
-	PLL_CONFIG( 
-					busy,
-					clk, //Main system clock
-					counter_param,
-					counter_type,
-					data_in,
-					data_out,
-					pll_areset,
-					pll_areset_in,
-					pll_configupdate,
-					pll_scanclk,
-					pll_scanclkena,
-					pll_scandata,
-					pll_scandataout,
-					pll_scandone,
-					read_param,
-					reconfig,
-					reset,
-					write_param );
-	
-	// PLL module
-	IF_CLK( 
-			  pll_areset,
-			  pll_configupdate,
-			  clk, //PLL input clock, main system clock
-			  pll_scanclk,
-			  pll_scanclkena,
-			  pllscandata,
-			  if_clk_signal, //PLL output signal
-			  pll_lock,
-			  pll_scandataout,
-			  pll_scandone );
-
+	assign quad_out = (1'b1 << counter);
 	
 endmodule

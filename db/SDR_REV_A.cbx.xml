@@ -1,6 +1,18 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="SDR_REV_A">
-		<CBX_INST_ENTRY INSTANCE_NAME="|SDR_REV_A|IF_SYNTH:comb_4|IF_CLK:comb_10|altpll:altpll_component" CBX_FILE_NAME="IF_CLK_altpll.v"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr13" CBX_FILE_NAME="cntr_3kj.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|altsyncram:altsyncram4" CBX_FILE_NAME="altsyncram_d7r.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_compare:cmpr7" CBX_FILE_NAME="cmpr_6pd.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr1" CBX_FILE_NAME="cntr_c1l.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr14" CBX_FILE_NAME="cntr_2kj.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|SDR_REV_A|IF_SYNTH:if_synth|IF_CLK:lo_a|altpll:altpll_component" CBX_FILE_NAME="IF_CLK_altpll1.v"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_add_sub:add_sub5" CBX_FILE_NAME="add_sub_qqa.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr15" CBX_FILE_NAME="cntr_c1l.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr2" CBX_FILE_NAME="cntr_idj.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_add_sub:add_sub6" CBX_FILE_NAME="add_sub_t9a.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr12" CBX_FILE_NAME="cntr_c1l.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr3" CBX_FILE_NAME="cntr_2kj.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_decode:decode11" CBX_FILE_NAME="decode_bbf.tdf"/>
 	</PROJECT>
 </LOG_ROOT>

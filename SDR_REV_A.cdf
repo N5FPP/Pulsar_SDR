@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP4CE22F17) Path("C:/fpga/SDR_REV_A/") File("SDR_REV_A.sof") MfrSpec(OpMask(1));
+		Device PartName(EP4CE22F17) Path("C:/Repositories/Pulsar_SDR/") File("SDR_REV_A.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

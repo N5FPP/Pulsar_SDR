@@ -1,0 +1,2 @@
+Warning (10268): Verilog HDL information at SDR_REV_A.v(122): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at SDR_REV_A.v(133): always construct contains both blocking and non-blocking assignments

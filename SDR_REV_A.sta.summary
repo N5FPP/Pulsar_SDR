@@ -2,76 +2,76 @@
 TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
-Type  : Slow 1200mV 85C Model Setup 'comb_4|comb_10|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 9.206
+Type  : Slow 1200mV 85C Model Setup 'CLOCK_50'
+Slack : 5.689
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Setup 'CLOCK_50'
-Slack : 16.329
+Type  : Slow 1200mV 85C Model Setup 'if_synth|lo_a|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 10239.201
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'CLOCK_50'
-Slack : 0.358
+Slack : 0.310
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Hold 'comb_4|comb_10|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 0.358
-TNS   : 0.000
-
-Type  : Slow 1200mV 85C Model Minimum Pulse Width 'comb_4|comb_10|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 4.747
+Type  : Slow 1200mV 85C Model Hold 'if_synth|lo_a|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 0.357
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'CLOCK_50'
-Slack : 9.596
+Slack : 8.736
 TNS   : 0.000
 
-Type  : Slow 1200mV 0C Model Setup 'comb_4|comb_10|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 9.288
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'if_synth|lo_a|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 5119.747
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'CLOCK_50'
-Slack : 16.767
+Slack : 6.279
 TNS   : 0.000
 
-Type  : Slow 1200mV 0C Model Hold 'comb_4|comb_10|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 0.312
+Type  : Slow 1200mV 0C Model Setup 'if_synth|lo_a|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 10239.282
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'CLOCK_50'
+Slack : 0.310
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'if_synth|lo_a|altpll_component|auto_generated|pll1|clk[0]'
 Slack : 0.313
 TNS   : 0.000
 
-Type  : Slow 1200mV 0C Model Minimum Pulse Width 'comb_4|comb_10|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 4.745
-TNS   : 0.000
-
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'CLOCK_50'
-Slack : 9.595
+Slack : 8.739
 TNS   : 0.000
 
-Type  : Fast 1200mV 0C Model Setup 'comb_4|comb_10|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 9.555
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'if_synth|lo_a|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 5119.745
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'CLOCK_50'
-Slack : 17.903
+Slack : 7.934
 TNS   : 0.000
 
-Type  : Fast 1200mV 0C Model Hold 'comb_4|comb_10|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 0.186
+Type  : Fast 1200mV 0C Model Setup 'if_synth|lo_a|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 10239.554
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'CLOCK_50'
-Slack : 0.187
+Slack : 0.143
 TNS   : 0.000
 
-Type  : Fast 1200mV 0C Model Minimum Pulse Width 'comb_4|comb_10|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 4.782
+Type  : Fast 1200mV 0C Model Hold 'if_synth|lo_a|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 0.188
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'CLOCK_50'
-Slack : 9.272
+Slack : 8.426
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'if_synth|lo_a|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 5119.781
 TNS   : 0.000
 
 ------------------------------------------------------------
