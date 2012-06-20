@@ -1,11 +1,6 @@
 
 //=======================================================
-//  This code implements a simple heartbeat signal at a
-//  configurable frequency to indicate the fpga is active
-//
-//  Usually it should be output to an LED
-//
-//  Copyright Lee Szuba 2012
+//  This code implements a push button switch debouncer
 //
 //  Material taken from fpga4fun.com is copyright of the
 //  original creator

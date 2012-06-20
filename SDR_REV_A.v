@@ -161,13 +161,6 @@ module SDR_REV_A(
 	// frequency
 	assign LED[6] = lo_lock;
 	
-	reg state_run;
-	always @(posedge clk)
-		if(lo_lock) state_run <= 1'b1;
-		else state_run <= state_run;
-
-	assign LED[5] = state_run;
-	
 	// Generate a simple heartbeat signal on one of the on-
 	// board LEDs (LED 0) to indicate the fpga is active
 	// Frequency < 1Hz

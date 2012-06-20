@@ -4,7 +4,7 @@
 // MODULE: altpll 
 
 // ============================================================
-// File Name: IF_CLK.v
+// File Name: PLL.v
 // Megafunction Name(s):
 // 			altpll
 //
@@ -31,7 +31,7 @@
 //Altera or its authorized distributors.  Please refer to the 
 //applicable agreement for further details.
 
-module IF_CLK (
+module PLL (
 	areset,
 	configupdate,
 	inclk0,
@@ -73,7 +73,7 @@ endmodule
 // Retrieval info: PRIVATE: BANDWIDTH STRING "1.000"
 // Retrieval info: PRIVATE: BANDWIDTH_FEATURE_ENABLED STRING "1"
 // Retrieval info: PRIVATE: BANDWIDTH_FREQ_UNIT STRING "MHz"
-// Retrieval info: PRIVATE: BANDWIDTH_PRESET STRING "Low"
+// Retrieval info: PRIVATE: BANDWIDTH_PRESET STRING "Medium"
 // Retrieval info: PRIVATE: BANDWIDTH_USE_AUTO STRING "1"
 // Retrieval info: PRIVATE: BANDWIDTH_USE_PRESET STRING "0"
 // Retrieval info: PRIVATE: CLKBAD_SWITCHOVER_CHECK STRING "0"
@@ -87,7 +87,7 @@ endmodule
 // Retrieval info: PRIVATE: DEVICE_SPEED_GRADE STRING "6"
 // Retrieval info: PRIVATE: DIV_FACTOR0 NUMERIC "1"
 // Retrieval info: PRIVATE: DUTY_CYCLE0 STRING "50.00000000"
-// Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE0 STRING "50.000000"
+// Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE0 STRING "600.000000"
 // Retrieval info: PRIVATE: EXPLICIT_SWITCHOVER_COUNTER STRING "0"
 // Retrieval info: PRIVATE: EXT_FEEDBACK_RADIO STRING "0"
 // Retrieval info: PRIVATE: GLOCKED_COUNTER_EDIT_CHANGED STRING "1"
@@ -110,7 +110,7 @@ endmodule
 // Retrieval info: PRIVATE: LVDS_PHASE_SHIFT_UNIT0 STRING "deg"
 // Retrieval info: PRIVATE: MIG_DEVICE_SPEED_GRADE STRING "Any"
 // Retrieval info: PRIVATE: MIRROR_CLK0 STRING "0"
-// Retrieval info: PRIVATE: MULT_FACTOR0 NUMERIC "1"
+// Retrieval info: PRIVATE: MULT_FACTOR0 NUMERIC "12"
 // Retrieval info: PRIVATE: NORMAL_MODE_RADIO STRING "0"
 // Retrieval info: PRIVATE: OUTPUT_FREQ0 STRING "100.00000000"
 // Retrieval info: PRIVATE: OUTPUT_FREQ_MODE0 STRING "0"
@@ -130,7 +130,7 @@ endmodule
 // Retrieval info: PRIVATE: PLL_PFDENA_CHECK STRING "0"
 // Retrieval info: PRIVATE: PLL_TARGET_HARCOPY_CHECK NUMERIC "0"
 // Retrieval info: PRIVATE: PRIMARY_CLK_COMBO STRING "inclk0"
-// Retrieval info: PRIVATE: RECONFIG_FILE STRING "IF_CLK.mif"
+// Retrieval info: PRIVATE: RECONFIG_FILE STRING "PLL.mif"
 // Retrieval info: PRIVATE: SACN_INPUTS_CHECK STRING "1"
 // Retrieval info: PRIVATE: SCAN_FEATURE_ENABLED STRING "1"
 // Retrieval info: PRIVATE: SELF_RESET_LOCK_LOSS STRING "0"
@@ -206,13 +206,11 @@ endmodule
 // Retrieval info: CONSTANT: SELF_RESET_ON_LOSS_LOCK STRING "OFF"
 // Retrieval info: CONSTANT: VCO_POST_SCALE NUMERIC "2"
 // Retrieval info: CONSTANT: WIDTH_CLOCK NUMERIC "5"
-// Retrieval info: CONSTANT: c0_high NUMERIC "6"
 // Retrieval info: CONSTANT: c0_initial NUMERIC "1"
-// Retrieval info: CONSTANT: c0_low NUMERIC "6"
-// Retrieval info: CONSTANT: c0_mode STRING "even"
+// Retrieval info: CONSTANT: c0_mode STRING "bypass"
 // Retrieval info: CONSTANT: c0_ph NUMERIC "0"
 // Retrieval info: CONSTANT: clk0_counter STRING "c0"
-// Retrieval info: CONSTANT: scan_chain_mif_file STRING "IF_CLK.mif"
+// Retrieval info: CONSTANT: scan_chain_mif_file STRING "PLL.mif"
 // Retrieval info: USED_PORT: @clk 0 0 5 0 OUTPUT_CLK_EXT VCC "@clk[4..0]"
 // Retrieval info: USED_PORT: areset 0 0 0 0 INPUT GND "areset"
 // Retrieval info: USED_PORT: c0 0 0 0 0 OUTPUT_CLK_EXT VCC "c0"
@@ -235,13 +233,13 @@ endmodule
 // Retrieval info: CONNECT: locked 0 0 0 0 @locked 0 0 0 0
 // Retrieval info: CONNECT: scandataout 0 0 0 0 @scandataout 0 0 0 0
 // Retrieval info: CONNECT: scandone 0 0 0 0 @scandone 0 0 0 0
-// Retrieval info: GEN_FILE: TYPE_NORMAL IF_CLK.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL IF_CLK.ppf TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL IF_CLK.inc FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL IF_CLK.cmp FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL IF_CLK.bsf FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL IF_CLK_inst.v FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL IF_CLK_bb.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL IF_CLK.mif TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL PLL.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL PLL.ppf TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL PLL.inc FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL PLL.cmp FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL PLL.bsf FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL PLL_inst.v FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL PLL_bb.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL PLL.mif TRUE
 // Retrieval info: LIB_FILE: altera_mf
 // Retrieval info: CBX_MODULE_PREFIX: ON
