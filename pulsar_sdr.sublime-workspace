@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"cou",
+				"counter_type"
+			],
+			[
+				"bus",
+				"reconfig_busy"
+			],
+			[
+				"in",
+				"input"
+			],
+			[
+				"re",
+				"reconfig"
+			],
+			[
 				"down",
 				"down_button_press"
 			],
@@ -44,10 +60,6 @@
 				"pll_lock"
 			],
 			[
-				"re",
-				"reset"
-			],
-			[
 				"_",
 				"_reset"
 			],
@@ -76,13 +88,13 @@
 			}
 		},
 		{
-			"contents": "\n//=======================================================\n//  This code implements a variable frequency synthesizer\n//	 using one of the built in PLLs and decoding logic to\n//  created quadrature signals\n//  \n//  Copyright Lee Szuba 2012\n//=======================================================\n\n\nmodule IF_SYNTH( input clk,\n				 output [3:0] quad_out,\n				 input  [8:0] if_freq,\n				 input  freq_strobe,\n				 output locked );\n	// clk\n	// Main system clock\n	//\n	// quad_out\n	// Output of quadrature signal to analog switches\n	// used to sample radio signal\n	// 1-4 demultiplexed signal\n	// with one output active at a time\n	// and 90 degree out of phase signals at 1/4\n	// of the pll clock frequency\n	//\n	// if_freq\n	// Desired if output frequency\n	//\n	// freq_strobe\n	// Input to command the PLL to switch frequencies\n	//\n	// locked\n	// Output signalling the PLL is reconfigured and locked\n\n\n\n 	\n	// PLL synthesized variable frequency clock\n	wire lo_clk_signal;\n		  \n	wire busy;\n	reg pll_reset, write_param, reconfig;\n	wire [8:0] data_in;\n\n	wire pll_lock;\n	assign locked = (~busy & pll_lock & (!state));\n\n	reg [3:0] state;\n	reg strobe_latch;\n\n\n	always @(posedge clk)\n		case(state)\n			0: 	begin\n					pll_reset <= 1'b0;\n					write_param <= 1'b0;\n					reconfig <= 1'b0;\n					if(freq_strobe)\n						begin\n							state <= 1;\n							//strobe_latch <= 1'b0;\n						end\n					else\n						begin\n							state <= 0;\n							//strobe_latch <= 1'b0;\n						end\n				end\n			1:  begin\n					//if(freq_strobe) strobe_latch <= 1'b1;\n					pll_reset <= 1'b0;\n					write_param <= 1'b0;\n					reconfig <= 1'b0;\n					state <= 2;\n				end\n			2:	begin\n					//if(freq_strobe) strobe_latch <= 1'b1;\n					pll_reset <= 1'b0;\n					write_param <= 1'b1;\n					reconfig <= 1'b0;\n					state <= 3;\n				end\n			3:	begin\n					//if(freq_strobe) strobe_latch <= 1'b1;\n					pll_reset <= 1'b0;\n					write_param <= 1'b0;\n					reconfig <= 1'b0;\n					if(!busy) state <= 4; else state <= 3;\n				end\n			4:	begin\n					//if(freq_strobe) strobe_latch <= 1'b1;\n					pll_reset <= 1'b0;\n					write_param <= 1'b0;\n					reconfig <= 1'b1;\n					state <= 5;\n				end\n			5:	begin\n					//if(freq_strobe) strobe_latch <= 1'b1;\n					pll_reset <= 1'b0;\n					write_param <= 1'b0;\n					reconfig <= 1'b0;\n					if(!busy) state <= 6; else state <= 5;\n				end\n			6:	begin\n					//if(freq_strobe) strobe_latch <= 1'b1;\n					pll_reset <= 1'b1;\n					write_param <= 1'b0;\n					reconfig <= 1'b0;\n					state <= 0;\n				end\n			default: begin\n					pll_reset <= 1'b0;\n					write_param <= 1'b0;\n					reconfig <= 1'b0;\n					state <= 0;\n				end\n		endcase\n\n\n\n	wire pll_areset,\n		 pll_configupdate,\n		 pll_scanclk,\n		 pll_scanclkena,\n		 pll_scandata,\n		 pll_scandataout,\n		 pll_scandone;\n\n	wire [2:0] counter_param = 3'b111; //Nominal division ratio setting\n	wire [3:0] counter_type = 4'b0001; //M (loop) counter\n\n	PLL_CONFIG pll_config( \n					.busy(busy),\n					.clock(clk), //Main system clock\n					.counter_param(counter_param),\n					.counter_type(counter_type),\n					.data_in(if_freq),\n					.pll_areset(pll_areset),       \n					.pll_areset_in(pll_reset), //PLL reset\n					.pll_configupdate(pll_configupdate),\n					.pll_scanclk(pll_scanclk),\n					.pll_scanclkena(pll_scanclkena),\n					.pll_scandata(pll_scandata),\n					.pll_scandataout(pll_scandataout),\n					.pll_scandone(pll_scandone),\n					.reconfig(reconfig),\n					.write_param(write_param) );\n	\n	// PLL module\n	IF_CLK lo_a( \n			  .areset(pll_areset),\n			  .configupdate(pll_configupdate),\n			  .inclk0(clk), //PLL input clock, main system clock\n			  .scanclk(pll_scanclk),\n			  .scanclkena(pll_scanclkena),\n			  .scandata(pll_scandata),\n			  .c0(lo_clk_signal), //PLL output signal\n			  .locked(pll_lock),\n			  .scandataout(pll_scandataout),\n			  .scandone(pll_scandone) );\n\n	\n	\n	// This code implements a two bit binary counter and\n   // a 1-4 demultiplexer used to create intermediate\n   // frequencies in the radio receiver\n   //\n   // The four quadrature signals are created directly to\n   // output to the analog switches\n	// Note the quadrature generator divides by 4 so the IF\n	// clock has to be four times faster than the output\n	\n	// Binary counter, 2 bits wide\n	reg [1:0] counter;\n	always @(posedge lo_clk_signal) counter <= counter + 1'b1;\n	// 2-4 demultiplexer\n	assign quad_out = (1'b1 << counter);\n	\nendmodule",
+			"contents": "\n//=======================================================\n//  This code implements a variable frequency synthesizer\n//	 using one of the built in PLLs and decoding logic to\n//  created quadrature signals\n//  \n//  Copyright Lee Szuba 2012\n//=======================================================\n\n\nmodule IF_SYNTH( input clk,\n				 output [3:0] quad_out,\n				 input  [8:0] if_freq,\n				 input  freq_strobe,\n				 output locked );\n	// clk\n	// Main system clock\n	//\n	// quad_out\n	// Output of quadrature signal to analog switches\n	// used to sample radio signal\n	// 1-4 demultiplexed signal\n	// with one output active at a time\n	// and 90 degree out of phase signals at 1/4\n	// of the pll clock frequency\n	//\n	// if_freq\n	// Desired if output frequency\n	//\n	// freq_strobe\n	// Input to command the PLL to switch frequencies\n	//\n	// locked\n	// Output signalling the PLL is reconfigured and locked\n\n\n\n	wire pll_areset,\n		 pll_configupdate,\n		 pll_scanclk,\n		 pll_scanclkena,\n		 pll_scandata,\n		 pll_scandataout,\n		 pll_scandone;\n\n	wire [2:0] counter_param = 3'b111; //Nominal division ratio setting\n	wire [3:0] counter_type = 4'b0001; //M (loop) counter\n\n	PLL_CONFIG pll_config( \n					.busy(busy),\n					.clock(clk), //Main system clock\n					.counter_param(counter_param),\n					.counter_type(counter_type),\n					.data_in(if_freq),\n					.pll_areset(pll_areset),       \n					.pll_areset_in(pll_reset), //PLL reset\n					.pll_configupdate(pll_configupdate),\n					.pll_scanclk(pll_scanclk),\n					.pll_scanclkena(pll_scanclkena),\n					.pll_scandata(pll_scandata),\n					.pll_scandataout(pll_scandataout),\n					.pll_scandone(pll_scandone),\n					.reconfig(reconfig),\n					.write_param(write_param) );\n	\n	// PLL module\n	IF_CLK lo_a( \n			  .areset(pll_areset),\n			  .configupdate(pll_configupdate),\n			  .inclk0(clk), //PLL input clock, main system clock\n			  .scanclk(pll_scanclk),\n			  .scanclkena(pll_scanclkena),\n			  .scandata(pll_scandata),\n			  .c0(lo_clk_signal), //PLL output signal\n			  .locked(pll_lock),\n			  .scandataout(pll_scandataout),\n			  .scandone(pll_scandone) );\n\n	\n	\n	// This code implements a two bit binary counter and\n   // a 1-4 demultiplexer used to create intermediate\n   // frequencies in the radio receiver\n   //\n   // The four quadrature signals are created directly to\n   // output to the analog switches\n	// Note the quadrature generator divides by 4 so the IF\n	// clock has to be four times faster than the output\n	\n	// Binary counter, 2 bits wide\n	reg [1:0] counter;\n	always @(posedge lo_clk_signal) counter <= counter + 1'b1;\n	// 2-4 demultiplexer\n	assign quad_out = (1'b1 << counter);\n	\nendmodule",
 			"file": "IF_SYNTH.v",
 			"file_size": 4466,
-			"file_write_time": 129845588985700753,
+			"file_write_time": 129846369187454380,
 			"settings":
 			{
-				"buffer_size": 4287,
+				"buffer_size": 2616,
 				"line_ending": "Windows"
 			}
 		},
@@ -95,27 +107,13 @@
 			}
 		},
 		{
-			"contents": "module altpll\n#(	parameter	bandwidth = 0,\n	parameter	bandwidth_type = \"AUTO\",\n	parameter	c0_high = 0,\n	parameter	c0_initial = 0,\n	parameter	c0_low = 0,\n	parameter	c0_mode = \"BYPASS\",\n	parameter	c0_ph = 0,\n	parameter	c0_test_source = 5,\n	parameter	c1_high = 0,\n	parameter	c1_initial = 0,\n	parameter	c1_low = 0,\n	parameter	c1_mode = \"BYPASS\",\n	parameter	c1_ph = 0,\n	parameter	c1_test_source = 5,\n	parameter	c1_use_casc_in = \"OFF\",\n	parameter	c2_high = 0,\n	parameter	c2_initial = 0,\n	parameter	c2_low = 0,\n	parameter	c2_mode = \"BYPASS\",\n	parameter	c2_ph = 0,\n	parameter	c2_test_source = 5,\n	parameter	c2_use_casc_in = \"OFF\",\n	parameter	c3_high = 0,\n	parameter	c3_initial = 0,\n	parameter	c3_low = 0,\n	parameter	c3_mode = \"BYPASS\",\n	parameter	c3_ph = 0,\n	parameter	c3_test_source = 5,\n	parameter	c3_use_casc_in = \"OFF\",\n	parameter	c4_high = 0,\n	parameter	c4_initial = 0,\n	parameter	c4_low = 0,\n	parameter	c4_mode = \"BYPASS\",\n	parameter	c4_ph = 0,\n	parameter	c4_test_source = 5,\n	parameter	c4_use_casc_in = \"OFF\",\n	parameter	c5_high = 0,\n	parameter	c5_initial = 0,\n	parameter	c5_low = 0,\n	parameter	c5_mode = \"BYPASS\",\n	parameter	c5_ph = 0,\n	parameter	c5_test_source = 5,\n	parameter	c5_use_casc_in = \"OFF\",\n	parameter	c6_high = 0,\n	parameter	c6_initial = 0,\n	parameter	c6_low = 0,\n	parameter	c6_mode = \"BYPASS\",\n	parameter	c6_ph = 0,\n	parameter	c6_test_source = 5,\n	parameter	c6_use_casc_in = \"OFF\",\n	parameter	c7_high = 0,\n	parameter	c7_initial = 0,\n	parameter	c7_low = 0,\n	parameter	c7_mode = \"BYPASS\",\n	parameter	c7_ph = 0,\n	parameter	c7_test_source = 5,\n	parameter	c7_use_casc_in = \"OFF\",\n	parameter	c8_high = 0,\n	parameter	c8_initial = 0,\n	parameter	c8_low = 0,\n	parameter	c8_mode = \"BYPASS\",\n	parameter	c8_ph = 0,\n	parameter	c8_test_source = 5,\n	parameter	c8_use_casc_in = \"OFF\",\n	parameter	c9_high = 0,\n	parameter	c9_initial = 0,\n	parameter	c9_low = 0,\n	parameter	c9_mode = \"BYPASS\",\n	parameter	c9_ph = 0,\n	parameter	c9_test_source = 5,\n	parameter	c9_use_casc_in = \"OFF\",\n	parameter	charge_pump_current = 2,\n	parameter	charge_pump_current_bits = 9999,\n	parameter	clk0_counter = \"G0\",\n	parameter	clk0_divide_by = 1,\n	parameter	clk0_duty_cycle = 50,\n	parameter	clk0_multiply_by = 1,\n	parameter	clk0_output_frequency = 0,\n	parameter	clk0_phase_shift = \"0\",\n	parameter	clk0_time_delay = \"0\",\n	parameter	clk0_use_even_counter_mode = \"OFF\",\n	parameter	clk0_use_even_counter_value = \"OFF\",\n	parameter	clk1_counter = \"G0\",\n	parameter	clk1_divide_by = 1,\n	parameter	clk1_duty_cycle = 50,\n	parameter	clk1_multiply_by = 1,\n	parameter	clk1_output_frequency = 0,\n	parameter	clk1_phase_shift = \"0\",\n	parameter	clk1_time_delay = \"0\",\n	parameter	clk1_use_even_counter_mode = \"OFF\",\n	parameter	clk1_use_even_counter_value = \"OFF\",\n	parameter	clk2_counter = \"G0\",\n	parameter	clk2_divide_by = 1,\n	parameter	clk2_duty_cycle = 50,\n	parameter	clk2_multiply_by = 1,\n	parameter	clk2_output_frequency = 0,\n	parameter	clk2_phase_shift = \"0\",\n	parameter	clk2_time_delay = \"0\",\n	parameter	clk2_use_even_counter_mode = \"OFF\",\n	parameter	clk2_use_even_counter_value = \"OFF\",\n	parameter	clk3_counter = \"G0\",\n	parameter	clk3_divide_by = 1,\n	parameter	clk3_duty_cycle = 50,\n	parameter	clk3_multiply_by = 1,\n	parameter	clk3_phase_shift = \"0\",\n	parameter	clk3_time_delay = \"0\",\n	parameter	clk3_use_even_counter_mode = \"OFF\",\n	parameter	clk3_use_even_counter_value = \"OFF\",\n	parameter	clk4_counter = \"G0\",\n	parameter	clk4_divide_by = 1,\n	parameter	clk4_duty_cycle = 50,\n	parameter	clk4_multiply_by = 1,\n	parameter	clk4_phase_shift = \"0\",\n	parameter	clk4_time_delay = \"0\",\n	parameter	clk4_use_even_counter_mode = \"OFF\",\n	parameter	clk4_use_even_counter_value = \"OFF\",\n	parameter	clk5_counter = \"G0\",\n	parameter	clk5_divide_by = 1,\n	parameter	clk5_duty_cycle = 50,\n	parameter	clk5_multiply_by = 1,\n	parameter	clk5_phase_shift = \"0\",\n	parameter	clk5_time_delay = \"0\",\n	parameter	clk5_use_even_counter_mode = \"OFF\",\n	parameter	clk5_use_even_counter_value = \"OFF\",\n	parameter	clk6_counter = \"E0\",\n	parameter	clk6_divide_by = 0,\n	parameter	clk6_duty_cycle = 50,\n	parameter	clk6_multiply_by = 0,\n	parameter	clk6_phase_shift = \"0\",\n	parameter	clk6_use_even_counter_mode = \"OFF\",\n	parameter	clk6_use_even_counter_value = \"OFF\",\n	parameter	clk7_counter = \"E1\",\n	parameter	clk7_divide_by = 0,\n	parameter	clk7_duty_cycle = 50,\n	parameter	clk7_multiply_by = 0,\n	parameter	clk7_phase_shift = \"0\",\n	parameter	clk7_use_even_counter_mode = \"OFF\",\n	parameter	clk7_use_even_counter_value = \"OFF\",\n	parameter	clk8_counter = \"E2\",\n	parameter	clk8_divide_by = 0,\n	parameter	clk8_duty_cycle = 50,\n	parameter	clk8_multiply_by = 0,\n	parameter	clk8_phase_shift = \"0\",\n	parameter	clk8_use_even_counter_mode = \"OFF\",\n	parameter	clk8_use_even_counter_value = \"OFF\",\n	parameter	clk9_counter = \"E3\",\n	parameter	clk9_divide_by = 0,\n	parameter	clk9_duty_cycle = 50,\n	parameter	clk9_multiply_by = 0,\n	parameter	clk9_phase_shift = \"0\",\n	parameter	clk9_use_even_counter_mode = \"OFF\",\n	parameter	clk9_use_even_counter_value = \"OFF\",\n	parameter	compensate_clock = \"CLK0\",\n	parameter	down_spread = \"0\",\n	parameter	dpa_divide_by = 1,\n	parameter	dpa_divider = 0,\n	parameter	dpa_multiply_by = 0,\n	parameter	e0_high = 1,\n	parameter	e0_initial = 1,\n	parameter	e0_low = 1,\n	parameter	e0_mode = \"BYPASS\",\n	parameter	e0_ph = 0,\n	parameter	e0_time_delay = 0,\n	parameter	e1_high = 1,\n	parameter	e1_initial = 1,\n	parameter	e1_low = 1,\n	parameter	e1_mode = \"BYPASS\",\n	parameter	e1_ph = 0,\n	parameter	e1_time_delay = 0,\n	parameter	e2_high = 1,\n	parameter	e2_initial = 1,\n	parameter	e2_low = 1,\n	parameter	e2_mode = \"BYPASS\",\n	parameter	e2_ph = 0,\n	parameter	e2_time_delay = 0,\n	parameter	e3_high = 1,\n	parameter	e3_initial = 1,\n	parameter	e3_low = 1,\n	parameter	e3_mode = \"BYPASS\",\n	parameter	e3_ph = 0,\n	parameter	e3_time_delay = 0,\n	parameter	enable0_counter = \"L0\",\n	parameter	enable1_counter = \"L0\",\n	parameter	enable_switch_over_counter = \"OFF\",\n	parameter	extclk0_counter = \"E0\",\n	parameter	extclk0_divide_by = 1,\n	parameter	extclk0_duty_cycle = 50,\n	parameter	extclk0_multiply_by = 1,\n	parameter	extclk0_phase_shift = \"0\",\n	parameter	extclk0_time_delay = \"0\",\n	parameter	extclk1_counter = \"E1\",\n	parameter	extclk1_divide_by = 1,\n	parameter	extclk1_duty_cycle = 50,\n	parameter	extclk1_multiply_by = 1,\n	parameter	extclk1_phase_shift = \"0\",\n	parameter	extclk1_time_delay = \"0\",\n	parameter	extclk2_counter = \"E2\",\n	parameter	extclk2_divide_by = 1,\n	parameter	extclk2_duty_cycle = 50,\n	parameter	extclk2_multiply_by = 1,\n	parameter	extclk2_phase_shift = \"0\",\n	parameter	extclk2_time_delay = \"0\",\n	parameter	extclk3_counter = \"E3\",\n	parameter	extclk3_divide_by = 1,\n	parameter	extclk3_duty_cycle = 50,\n	parameter	extclk3_multiply_by = 1,\n	parameter	extclk3_phase_shift = \"0\",\n	parameter	extclk3_time_delay = \"0\",\n	parameter	feedback_source = \"EXTCLK0\",\n	parameter	g0_high = 1,\n	parameter	g0_initial = 1,\n	parameter	g0_low = 1,\n	parameter	g0_mode = \"BYPASS\",\n	parameter	g0_ph = 0,\n	parameter	g0_time_delay = 0,\n	parameter	g1_high = 1,\n	parameter	g1_initial = 1,\n	parameter	g1_low = 1,\n	parameter	g1_mode = \"BYPASS\",\n	parameter	g1_ph = 0,\n	parameter	g1_time_delay = 0,\n	parameter	g2_high = 1,\n	parameter	g2_initial = 1,\n	parameter	g2_low = 1,\n	parameter	g2_mode = \"BYPASS\",\n	parameter	g2_ph = 0,\n	parameter	g2_time_delay = 0,\n	parameter	g3_high = 1,\n	parameter	g3_initial = 1,\n	parameter	g3_low = 1,\n	parameter	g3_mode = \"BYPASS\",\n	parameter	g3_ph = 0,\n	parameter	g3_time_delay = 0,\n	parameter	gate_lock_counter = 0,\n	parameter	gate_lock_signal = \"NO\",\n	parameter	inclk0_input_frequency = 1,\n	parameter	inclk1_input_frequency = 0,\n	parameter	intended_device_family = \"NONE\",\n	parameter	invalid_lock_multiplier = 5,\n	parameter	l0_high = 1,\n	parameter	l0_initial = 1,\n	parameter	l0_low = 1,\n	parameter	l0_mode = \"BYPASS\",\n	parameter	l0_ph = 0,\n	parameter	l0_time_delay = 0,\n	parameter	l1_high = 1,\n	parameter	l1_initial = 1,\n	parameter	l1_low = 1,\n	parameter	l1_mode = \"BYPASS\",\n	parameter	l1_ph = 0,\n	parameter	l1_time_delay = 0,\n	parameter	lock_high = 1,\n	parameter	lock_low = 1,\n	parameter	lock_window_ui = \" 0.05\",\n	parameter	lock_window_ui_bits = \"UNUSED\",\n	parameter	loop_filter_c = 5,\n	parameter	loop_filter_c_bits = 9999,\n	parameter	loop_filter_r = \" 1.000000\",\n	parameter	loop_filter_r_bits = 9999,\n	parameter	lpm_hint = \"UNUSED\",\n	parameter	lpm_type = \"altpll\",\n	parameter	m = 0,\n	parameter	m2 = 1,\n	parameter	m_initial = 0,\n	parameter	m_ph = 0,\n	parameter	m_test_source = 5,\n	parameter	m_time_delay = 0,\n	parameter	n = 1,\n	parameter	n2 = 1,\n	parameter	n_time_delay = 0,\n	parameter	operation_mode = \"unused\",\n	parameter	pfd_max = 0,\n	parameter	pfd_min = 0,\n	parameter	pll_type = \"AUTO\",\n	parameter	port_activeclock = \"PORT_CONNECTIVITY\",\n	parameter	port_areset = \"PORT_CONNECTIVITY\",\n	parameter	port_clk0 = \"PORT_CONNECTIVITY\",\n	parameter	port_clk1 = \"PORT_CONNECTIVITY\",\n	parameter	port_clk2 = \"PORT_CONNECTIVITY\",\n	parameter	port_clk3 = \"PORT_CONNECTIVITY\",\n	parameter	port_clk4 = \"PORT_CONNECTIVITY\",\n	parameter	port_clk5 = \"PORT_CONNECTIVITY\",\n	parameter	port_clk6 = \"PORT_UNUSED\",\n	parameter	port_clk7 = \"PORT_UNUSED\",\n	parameter	port_clk8 = \"PORT_UNUSED\",\n	parameter	port_clk9 = \"PORT_UNUSED\",\n	parameter	port_clkbad0 = \"PORT_CONNECTIVITY\",\n	parameter	port_clkbad1 = \"PORT_CONNECTIVITY\",\n	parameter	port_clkena0 = \"PORT_CONNECTIVITY\",\n	parameter	port_clkena1 = \"PORT_CONNECTIVITY\",\n	parameter	port_clkena2 = \"PORT_CONNECTIVITY\",\n	parameter	port_clkena3 = \"PORT_CONNECTIVITY\",\n	parameter	port_clkena4 = \"PORT_CONNECTIVITY\",\n	parameter	port_clkena5 = \"PORT_CONNECTIVITY\",\n	parameter	port_clkloss = \"PORT_CONNECTIVITY\",\n	parameter	port_clkswitch = \"PORT_CONNECTIVITY\",\n	parameter	port_configupdate = \"PORT_CONNECTIVITY\",\n	parameter	port_enable0 = \"PORT_CONNECTIVITY\",\n	parameter	port_enable1 = \"PORT_CONNECTIVITY\",\n	parameter	port_extclk0 = \"PORT_CONNECTIVITY\",\n	parameter	port_extclk1 = \"PORT_CONNECTIVITY\",\n	parameter	port_extclk2 = \"PORT_CONNECTIVITY\",\n	parameter	port_extclk3 = \"PORT_CONNECTIVITY\",\n	parameter	port_extclkena0 = \"PORT_CONNECTIVITY\",\n	parameter	port_extclkena1 = \"PORT_CONNECTIVITY\",\n	parameter	port_extclkena2 = \"PORT_CONNECTIVITY\",\n	parameter	port_extclkena3 = \"PORT_CONNECTIVITY\",\n	parameter	port_fbin = \"PORT_CONNECTIVITY\",\n	parameter	port_fbout = \"PORT_CONNECTIVITY\",\n	parameter	port_inclk0 = \"PORT_CONNECTIVITY\",\n	parameter	port_inclk1 = \"PORT_CONNECTIVITY\",\n	parameter	port_locked = \"PORT_CONNECTIVITY\",\n	parameter	port_pfdena = \"PORT_CONNECTIVITY\",\n	parameter	port_phasecounterselect = \"PORT_CONNECTIVITY\",\n	parameter	port_phasedone = \"PORT_CONNECTIVITY\",\n	parameter	port_phasestep = \"PORT_CONNECTIVITY\",\n	parameter	port_phaseupdown = \"PORT_CONNECTIVITY\",\n	parameter	port_pllena = \"PORT_CONNECTIVITY\",\n	parameter	port_scanaclr = \"PORT_CONNECTIVITY\",\n	parameter	port_scanclk = \"PORT_CONNECTIVITY\",\n	parameter	port_scanclkena = \"PORT_CONNECTIVITY\",\n	parameter	port_scandata = \"PORT_CONNECTIVITY\",\n	parameter	port_scandataout = \"PORT_CONNECTIVITY\",\n	parameter	port_scandone = \"PORT_CONNECTIVITY\",\n	parameter	port_scanread = \"PORT_CONNECTIVITY\",\n	parameter	port_scanwrite = \"PORT_CONNECTIVITY\",\n	parameter	port_sclkout0 = \"PORT_CONNECTIVITY\",\n	parameter	port_sclkout1 = \"PORT_CONNECTIVITY\",\n	parameter	port_vcooverrange = \"PORT_CONNECTIVITY\",\n	parameter	port_vcounderrange = \"PORT_CONNECTIVITY\",\n	parameter	primary_clock = \"INCLK0\",\n	parameter	qualify_conf_done = \"OFF\",\n	parameter	scan_chain = \"LONG\",\n	parameter	scan_chain_mif_file = \"UNUSED\",\n	parameter	sclkout0_phase_shift = \"0\",\n	parameter	sclkout1_phase_shift = \"0\",\n	parameter	self_reset_on_gated_loss_lock = \"OFF\",\n	parameter	self_reset_on_loss_lock = \"OFF\",\n	parameter	sim_gate_lock_device_behavior = \"OFF\",\n	parameter	skip_vco = \"OFF\",\n	parameter	spread_frequency = 0,\n	parameter	ss = 1,\n	parameter	switch_over_counter = 0,\n	parameter	switch_over_on_gated_lock = \"OFF\",\n	parameter	switch_over_on_lossclk = \"OFF\",\n	parameter	switch_over_type = \"AUTO\",\n	parameter	using_fbmimicbidir_port = \"OFF\",\n	parameter	valid_lock_multiplier = 1,\n	parameter	vco_center = 0,\n	parameter	vco_divide_by = 0,\n	parameter	vco_frequency_control = \"AUTO\",\n	parameter	vco_max = 0,\n	parameter	vco_min = 0,\n	parameter	vco_multiply_by = 0,\n	parameter	vco_phase_shift_step = 0,\n	parameter	vco_post_scale = 0,\n	parameter	vco_range_detector_high_bits = \"UNUSED\",\n	parameter	vco_range_detector_low_bits = \"UNUSED\",\n	parameter	width_clock = 6,\n	parameter	width_phasecounterselect = 4)\n(	output	wire	activeclock,\n	input	wire	areset,\n	output	wire	[width_clock-1:0]	clk,\n	output	wire	[1:0]	clkbad,\n	input	wire	[5:0]	clkena,\n	output	wire	clkloss,\n	input	wire	clkswitch,\n	input	wire	configupdate,\n	output	wire	enable0,\n	output	wire	enable1,\n	output	wire	[3:0]	extclk,\n	input	wire	[3:0]	extclkena,\n	input	wire	fbin,\n	inout	wire	fbmimicbidir,\n	output	wire	fbout,\n	output	wire	fref,\n	output	wire	icdrclk,\n	input	wire	[1:0]	inclk,\n	output	wire	locked,\n	input	wire	pfdena,\n	input	wire	[width_phasecounterselect-1:0]	phasecounterselect,\n	output	wire	phasedone,\n	input	wire	phasestep,\n	input	wire	phaseupdown,\n	input	wire	pllena,\n	input	wire	scanaclr,\n	input	wire	scanclk,\n	input	wire	scanclkena,\n	input	wire	scandata,\n	output	wire	scandataout,\n	output	wire	scandone,\n	input	wire	scanread,\n	input	wire	scanwrite,\n	output	wire	sclkout0,\n	output	wire	sclkout1,\n	output	wire	vcooverrange,\n	output	wire	vcounderrange) /* synthesis syn_black_box=1 */;\nendmodule // altpll",
-			"settings":
-			{
-				"buffer_size": 13330,
-				"line_ending": "Windows",
-				"name": "module altpll"
-			}
-		},
-		{
-			"file": "IF_CLK.v",
-			"settings":
-			{
-				"buffer_size": 4959,
-				"line_ending": "Windows"
-			}
-		},
-		{
+			"contents": "\n//=======================================================\n//  This code is template generated by\n//  Terasic System Builder\n//=======================================================\n\n\n//=======================================================\n//  This code implements a software defined radio based\n//  on the DEO Nano board\n//\n//  Copyright Lee Szuba 2012\n//=======================================================\n\n\nmodule SDR_REV_A(\n\n		//////////// CLOCK //////////\n		CLOCK_50,\n\n		//////////// LED //////////\n		LED,\n\n		//////////// KEY //////////\n		KEY,\n\n		//////////// SW //////////\n		SW,\n\n		//////////// EPCS //////////\n		EPCS_ASDO,\n		EPCS_DATA0,\n		EPCS_DCLK,\n		EPCS_NCSO,\n\n		//////////// 2x13 GPIO Header //////////\n		GPIO_2,\n		GPIO_2_IN,\n\n		//////////// GPIO_0, GPIO_0 connect to GPIO Default //////////\n		A,\n		A_IN,\n\n		//////////// GPIO_1, GPIO_1 connect to GPIO Default //////////\n		B,\n		B_IN\n	);\n\n	//=======================================================\n	//  PARAMETER declarations\n	//=======================================================\n\n\n	//=======================================================\n	//  PORT declarations\n	//=======================================================\n\n	//////////// CLOCK //////////\n	input 		          		CLOCK_50;\n\n	//////////// LED //////////\n	output		     [7:0]		LED;\n\n	//////////// KEY //////////\n	input 		     [1:0]		KEY;\n\n	//////////// SW //////////\n	input 		     [3:0]		SW;\n\n	//////////// EPCS //////////\n	output		          		EPCS_ASDO;\n	input 		          		EPCS_DATA0;\n	output		          		EPCS_DCLK;\n	output		          		EPCS_NCSO;\n\n	//////////// 2x13 GPIO Header //////////\n	inout 		    [12:0]		GPIO_2;\n	input 		     [2:0]		GPIO_2_IN;\n\n	//////////// GPIO_0, GPIO_0 connect to GPIO Default //////////\n	inout 		    [33:0]		A;\n	input 		     [1:0]		A_IN;\n\n	//////////// GPIO_1, GPIO_1 connect to GPIO Default //////////\n	inout 		    [33:0]		B;\n	input 		     [1:0]		B_IN;\n\n\n	//=======================================================\n	//  REG/WIRE declarations\n	//=======================================================\n\n	// Alias the 50 MHz system clock to a signal just in case\n	// a PLL is later used to synthesize a faster clock rate\n	// in the future\n	wire clk = CLOCK_50;\n\n	// Clock outputs\n	wire [3:0] l_osc;\n	wire lo_lock;\n\n	// Heartbeat signal\n	wire beat_out;\n\n	// Outputs to LCD\n	wire LCD_E;\n	wire LCD_RS;\n	wire [7:0] LCD_DATA;\n\n	// Center tuning frequency -- the current PLL frequency\n	reg [8:0] tuning;\n	reg lo_strobe;\n	\n	wire up_button_press, down_button_press, down_pressed, up_pressed;\n	\n\n	parameter TUNING_STEP = 9'b00010000;\n\n	//=======================================================\n	//  Structural coding\n	//=======================================================\n\n\n	// Human interface\n	// One button raises the clock frequency, the other\n	// lowers it. To be used to tune the device\n	// 256 discrete values to start, depending on the tuning\n	// range, this may be increased\n\n	DEBOUNCER freq_up( .clk(clk), .button(KEY[0]), .button_down(up_button_press), .button_pressed(up_pressed) );\n	DEBOUNCER freq_down( .clk(clk), .button(KEY[1]), .button_down(down_button_press), .button_pressed(down_pressed) );\n\n	assign LED[4] = down_pressed || up_pressed;\n\n	always @(posedge clk)\n		begin\n			if(up_button_press)\n				begin\n					tuning <= tuning + TUNING_STEP;\n					lo_strobe <= 1'b1;\n				end\n			else if(down_button_press)\n				begin\n					tuning <= tuning - TUNING_STEP;\n					lo_strobe <= 1'b1;\n				end\n			else lo_strobe <= 1'b0;\n		end //Tuning counter control\n\n	assign LED[3:0] = tuning[8:5];\n\n	// Module to take clock frequency and synthesize\n	// quadrature outputs at adjustable frequency\n	IF_SYNTH if_synth( .clk(clk), .quad_out(l_osc), .if_freq(tuning),\n					   .freq_strobe(lo_strobe), .locked(lo_lock) );\n\n	// Quadrature signal on GPIO-1, pins 0,1,3,5\n	assign {B[5], B[3], B[1:0]} = l_osc[3:0];\n\n	// LED 7 indicates the PLL has locked to it's target\n	// frequency\n	assign LED[6] = lo_lock;x\n	\n	// Generate a simple heartbeat signal on one of the on-\n	// board LEDs (LED 0) to indicate the fpga is active\n	// Frequency < 1Hz\n	HEARTBEAT sdr_heartbeat( .clk(clk), .beat_out(beat_out) );\n	assign LED[7] = beat_out;\n	\nendmodule\n",
 			"file": "SDR_REV_A.v",
+			"file_size": 4668,
+			"file_write_time": 129845595728881680,
 			"settings":
 			{
-				"buffer_size": 4490,
+				"buffer_size": 4185,
 				"line_ending": "Windows"
 			}
 		}
@@ -149,6 +147,8 @@
 	"file_history":
 	[
 		"/C/Repositories/Pulsar_SDR/IF_CLK.v",
+		"/C/Repositories/Pulsar_SDR/PLL.v",
+		"/C/Repositories/Pulsar_SDR/IF_CLK_bb.v",
 		"/C/Users/owner/Documents/iClicker/AVR asm/AVR asm/rapidfire asm/gistfile1.asm",
 		"/C/Repositories/Pulsar_SDR/PLL_CONFIG.v",
 		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/User/SystemVerilog.sublime-settings",
@@ -179,6 +179,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"pll_lock",
 			"read_param"
 		],
 		"highlight": true,
@@ -232,15 +233,15 @@
 					"file": "IF_SYNTH.v",
 					"settings":
 					{
-						"buffer_size": 4287,
+						"buffer_size": 2616,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3738,
-								3738
+								2067,
+								2067
 							]
 						],
 						"settings":
@@ -249,7 +250,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1811.0,
+						"translation.y": 653.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -280,81 +281,27 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"settings":
-					{
-						"buffer_size": 13330,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								12635,
-								12635
-							]
-						],
-						"settings":
-						{
-							"auto_name": "module altpll",
-							"syntax": "Packages/Verilog/verilog.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
-					"buffer": 4,
-					"file": "IF_CLK.v",
-					"settings":
-					{
-						"buffer_size": 4959,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								376,
-								376
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/SystemVerilog/SystemVerilog.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
+					"buffer": 3,
 					"file": "SDR_REV_A.v",
 					"settings":
 					{
-						"buffer_size": 4490,
+						"buffer_size": 4185,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3951,
-								3951
+								4174,
+								4174
 							]
 						],
 						"settings":
@@ -363,7 +310,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1890.0,
+						"translation.y": 1575.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

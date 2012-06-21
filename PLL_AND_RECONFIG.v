@@ -37,7 +37,7 @@ module PLL_AND_RECONFIG( input        clk,
 
     reg [2:0] counter_param;
     reg [3:0] counter_type;
-    reg [3:0] state;
+    reg [7:0] state;
 
     always @(posedge clk)
         case(state)
@@ -122,6 +122,13 @@ module PLL_AND_RECONFIG( input        clk,
 			  .locked(lock),
 			  .scandataout(pll_scandataout),
 			  .scandone(pll_scandone) );
+
+	defparam bandwidth_type         =    "HIGH";
+    defparam c0_mode                =  "BYPASS";
+    defparam clk0_counter           =      "C0";
+    defparam clk0_divide_by         =         1;
+    defparam compensate_clock       =    "CLK0";
+    defparam inclk0_input_frequency =  50000000;
 
 
     assign busy = (~reconfig_busy & !state);
