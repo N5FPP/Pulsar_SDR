@@ -9,9 +9,10 @@
 
 module PLL_AND_RECONFIG( input        clk,
                          output       busy,
-						 input  [2:0] m,
-						 input  [3:0] n,
-                         input        strobe;
+						 input  [7:0] m,
+						 input  [7:0] n,
+                         input  [7:0] c0,
+                         input        strobe,
                          input        pll_reset,
                          output       lock,
                          output       clk_out );
@@ -122,13 +123,6 @@ module PLL_AND_RECONFIG( input        clk,
 			  .locked(lock),
 			  .scandataout(pll_scandataout),
 			  .scandone(pll_scandone) );
-
-	defparam bandwidth_type         =    "HIGH";
-    defparam c0_mode                =  "BYPASS";
-    defparam clk0_counter           =      "C0";
-    defparam clk0_divide_by         =         1;
-    defparam compensate_clock       =    "CLK0";
-    defparam inclk0_input_frequency =  50000000;
 
 
     assign busy = (~reconfig_busy & !state);

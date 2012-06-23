@@ -18,7 +18,7 @@
 --    Device Speed Grade: 6
 --    PLL Scan Chain: Fast PLL (144 bits)
 --    File Name: C:/Repositories/Pulsar_SDR//PLL.mif
---    Generated: Wed Jun 20 09:55:20 2012
+--    Generated: Fri Jun 22 17:10:21 2012
 
 WIDTH=1;
 DEPTH=144;
@@ -64,37 +64,37 @@ CONTENT BEGIN
 	34   :   0;
 	35   :   0;
 	36   :   0; -- M counter: Bypass = 0 (1 bit(s))
-	37   :   0; -- M counter: High Count = 6 (8 bit(s))
+	37   :   0; -- M counter: High Count = 5 (8 bit(s))
 	38   :   0;
 	39   :   0;
 	40   :   0;
 	41   :   0;
 	42   :   1;
-	43   :   1;
-	44   :   0;
-	45   :   0; -- M counter: Odd Division = 0 (1 bit(s))
-	46   :   0; -- M counter: Low Count = 6 (8 bit(s))
+	43   :   0;
+	44   :   1;
+	45   :   1; -- M counter: Odd Division = 1 (1 bit(s))
+	46   :   0; -- M counter: Low Count = 4 (8 bit(s))
 	47   :   0;
 	48   :   0;
 	49   :   0;
 	50   :   0;
 	51   :   1;
-	52   :   1;
+	52   :   0;
 	53   :   0;
-	54   :   1; -- clk0 counter: Bypass = 1 (1 bit(s))
-	55   :   0; -- clk0 counter: High Count = 0 (8 bit(s))
+	54   :   0; -- clk0 counter: Bypass = 0 (1 bit(s))
+	55   :   0; -- clk0 counter: High Count = 16 (8 bit(s))
 	56   :   0;
 	57   :   0;
-	58   :   0;
+	58   :   1;
 	59   :   0;
 	60   :   0;
 	61   :   0;
 	62   :   0;
 	63   :   0; -- clk0 counter: Odd Division = 0 (1 bit(s))
-	64   :   0; -- clk0 counter: Low Count = 0 (8 bit(s))
+	64   :   0; -- clk0 counter: Low Count = 16 (8 bit(s))
 	65   :   0;
 	66   :   0;
-	67   :   0;
+	67   :   1;
 	68   :   0;
 	69   :   0;
 	70   :   0;
