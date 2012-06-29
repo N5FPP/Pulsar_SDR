@@ -128,7 +128,7 @@ module PLL (
 		altpll_component.loop_filter_r_bits = 27,
 		altpll_component.lpm_hint = "CBX_MODULE_PREFIX=PLL",
 		altpll_component.lpm_type = "altpll",
-		altpll_component.m = 9,
+		altpll_component.m = 8,
 		altpll_component.m_initial = 1,
 		altpll_component.m_ph = 0,
 		altpll_component.n = 1,
@@ -178,10 +178,10 @@ module PLL (
 		altpll_component.self_reset_on_loss_lock = "OFF",
 		altpll_component.vco_post_scale = 2,
 		altpll_component.width_clock = 5,
-		altpll_component.c0_high = 16,
+		altpll_component.c0_high = 3,
 		altpll_component.c0_initial = 1,
-		altpll_component.c0_low = 16,
-		altpll_component.c0_mode = "even",
+		altpll_component.c0_low = 2,
+		altpll_component.c0_mode = "odd",
 		altpll_component.c0_ph = 0,
 		altpll_component.clk0_counter = "c0",
 		altpll_component.scan_chain_mif_file = "PLL.mif";
@@ -208,9 +208,9 @@ endmodule
 // Retrieval info: PRIVATE: CUR_DEDICATED_CLK STRING "c0"
 // Retrieval info: PRIVATE: CUR_FBIN_CLK STRING "c0"
 // Retrieval info: PRIVATE: DEVICE_SPEED_GRADE STRING "6"
-// Retrieval info: PRIVATE: DIV_FACTOR0 NUMERIC "265"
+// Retrieval info: PRIVATE: DIV_FACTOR0 NUMERIC "5"
 // Retrieval info: PRIVATE: DUTY_CYCLE0 STRING "50.00000000"
-// Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE0 STRING "14.060000"
+// Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE0 STRING "80.000000"
 // Retrieval info: PRIVATE: EXPLICIT_SWITCHOVER_COUNTER STRING "0"
 // Retrieval info: PRIVATE: EXT_FEEDBACK_RADIO STRING "0"
 // Retrieval info: PRIVATE: GLOCKED_COUNTER_EDIT_CHANGED STRING "1"
@@ -233,9 +233,9 @@ endmodule
 // Retrieval info: PRIVATE: LVDS_PHASE_SHIFT_UNIT0 STRING "deg"
 // Retrieval info: PRIVATE: MIG_DEVICE_SPEED_GRADE STRING "Any"
 // Retrieval info: PRIVATE: MIRROR_CLK0 STRING "0"
-// Retrieval info: PRIVATE: MULT_FACTOR0 NUMERIC "74"
+// Retrieval info: PRIVATE: MULT_FACTOR0 NUMERIC "8"
 // Retrieval info: PRIVATE: NORMAL_MODE_RADIO STRING "0"
-// Retrieval info: PRIVATE: OUTPUT_FREQ0 STRING "14.06000000"
+// Retrieval info: PRIVATE: OUTPUT_FREQ0 STRING "80.00000000"
 // Retrieval info: PRIVATE: OUTPUT_FREQ_MODE0 STRING "1"
 // Retrieval info: PRIVATE: OUTPUT_FREQ_UNIT0 STRING "MHz"
 // Retrieval info: PRIVATE: PHASE_RECONFIG_FEATURE_ENABLED STRING "1"
@@ -279,7 +279,7 @@ endmodule
 // Retrieval info: CONSTANT: LOOP_FILTER_C_BITS NUMERIC "0"
 // Retrieval info: CONSTANT: LOOP_FILTER_R_BITS NUMERIC "27"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "altpll"
-// Retrieval info: CONSTANT: M NUMERIC "9"
+// Retrieval info: CONSTANT: M NUMERIC "8"
 // Retrieval info: CONSTANT: M_INITIAL NUMERIC "1"
 // Retrieval info: CONSTANT: M_PH NUMERIC "0"
 // Retrieval info: CONSTANT: N NUMERIC "1"
@@ -329,10 +329,10 @@ endmodule
 // Retrieval info: CONSTANT: SELF_RESET_ON_LOSS_LOCK STRING "OFF"
 // Retrieval info: CONSTANT: VCO_POST_SCALE NUMERIC "2"
 // Retrieval info: CONSTANT: WIDTH_CLOCK NUMERIC "5"
-// Retrieval info: CONSTANT: c0_high NUMERIC "16"
+// Retrieval info: CONSTANT: c0_high NUMERIC "3"
 // Retrieval info: CONSTANT: c0_initial NUMERIC "1"
-// Retrieval info: CONSTANT: c0_low NUMERIC "16"
-// Retrieval info: CONSTANT: c0_mode STRING "even"
+// Retrieval info: CONSTANT: c0_low NUMERIC "2"
+// Retrieval info: CONSTANT: c0_mode STRING "odd"
 // Retrieval info: CONSTANT: c0_ph NUMERIC "0"
 // Retrieval info: CONSTANT: clk0_counter STRING "c0"
 // Retrieval info: CONSTANT: scan_chain_mif_file STRING "PLL.mif"

@@ -37,8 +37,8 @@ module IF_SYNTH( input clk,
 	// so the lo frequency will be whatever it is initially set to
 	PLL_AND_RECONFIG(.clk(clk), .busy(busy),
 					 .c0(1'b0), .m(1'b0), .n(1'b0),
-					 .strobe(1'b0), .pll_reset(1'b0), .lock(pll_lock)
-					 .clk_out(lo_clk) );
+					 .strobe(1'b0), .pll_reset(1'b0),
+					 .lock(pll_lock), .clk_out(lo_clk) );
 
 	assign locked = busy && pll_lock;
 	

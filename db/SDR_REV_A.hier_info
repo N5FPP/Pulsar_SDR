@@ -5,7 +5,7 @@ LED[1] <= tuning[6].DB_MAX_OUTPUT_PORT_TYPE
 LED[2] <= tuning[7].DB_MAX_OUTPUT_PORT_TYPE
 LED[3] <= tuning[8].DB_MAX_OUTPUT_PORT_TYPE
 LED[4] <= LED.DB_MAX_OUTPUT_PORT_TYPE
-LED[5] <= state_run.DB_MAX_OUTPUT_PORT_TYPE
+LED[5] <= <GND>
 LED[6] <= IF_SYNTH:if_synth.locked
 LED[7] <= HEARTBEAT:sdr_heartbeat.beat_out
 KEY[0] => KEY[0].IN1
@@ -161,25 +161,58 @@ button_down <= button_down.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |SDR_REV_A|IF_SYNTH:if_synth
-clk => clk.IN2
+clk => clk.IN1
 quad_out[0] <= ShiftLeft0.DB_MAX_OUTPUT_PORT_TYPE
 quad_out[1] <= ShiftLeft0.DB_MAX_OUTPUT_PORT_TYPE
 quad_out[2] <= ShiftLeft0.DB_MAX_OUTPUT_PORT_TYPE
 quad_out[3] <= ShiftLeft0.DB_MAX_OUTPUT_PORT_TYPE
-if_freq[0] => if_freq[0].IN1
-if_freq[1] => if_freq[1].IN1
-if_freq[2] => if_freq[2].IN1
-if_freq[3] => if_freq[3].IN1
-if_freq[4] => if_freq[4].IN1
-if_freq[5] => if_freq[5].IN1
-if_freq[6] => if_freq[6].IN1
-if_freq[7] => if_freq[7].IN1
-if_freq[8] => if_freq[8].IN1
-freq_strobe => Mux2.IN13
+if_freq[0] => ~NO_FANOUT~
+if_freq[1] => ~NO_FANOUT~
+if_freq[2] => ~NO_FANOUT~
+if_freq[3] => ~NO_FANOUT~
+if_freq[4] => ~NO_FANOUT~
+if_freq[5] => ~NO_FANOUT~
+if_freq[6] => ~NO_FANOUT~
+if_freq[7] => ~NO_FANOUT~
+if_freq[8] => ~NO_FANOUT~
+freq_strobe => ~NO_FANOUT~
 locked <= locked.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3
+clk => clk.IN2
+busy <= PLL_CONFIG:pll_config.busy
+m[0] => ~NO_FANOUT~
+m[1] => ~NO_FANOUT~
+m[2] => ~NO_FANOUT~
+m[3] => ~NO_FANOUT~
+m[4] => ~NO_FANOUT~
+m[5] => ~NO_FANOUT~
+m[6] => ~NO_FANOUT~
+m[7] => ~NO_FANOUT~
+n[0] => ~NO_FANOUT~
+n[1] => ~NO_FANOUT~
+n[2] => ~NO_FANOUT~
+n[3] => ~NO_FANOUT~
+n[4] => ~NO_FANOUT~
+n[5] => ~NO_FANOUT~
+n[6] => ~NO_FANOUT~
+n[7] => ~NO_FANOUT~
+c0[0] => ~NO_FANOUT~
+c0[1] => ~NO_FANOUT~
+c0[2] => ~NO_FANOUT~
+c0[3] => ~NO_FANOUT~
+c0[4] => ~NO_FANOUT~
+c0[5] => ~NO_FANOUT~
+c0[6] => ~NO_FANOUT~
+c0[7] => ~NO_FANOUT~
+strobe => ~NO_FANOUT~
+pll_reset => pll_reset.IN1
+lock <= PLL:pll_module.locked
+clk_out <= PLL:pll_module.c0
+
+
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config
 clock => clock.IN1
 counter_param[0] => counter_param[0].IN1
 counter_param[1] => counter_param[1].IN1
@@ -221,7 +254,7 @@ pll_scanclkena <= PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component.pll_sc
 pll_scandata <= PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component.pll_scandata
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component
 busy <= busy.DB_MAX_OUTPUT_PORT_TYPE
 clock => clock.IN8
 counter_param[0] => read_init_nominal_state.IN1
@@ -341,7 +374,7 @@ write_param => shift_reg_load_nominal_enable.IN1
 write_param => idle_state.IN1
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|altsyncram:altsyncram4
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|altsyncram:altsyncram4
 wren_a => altsyncram_d7r:auto_generated.wren_a
 rden_a => ~NO_FANOUT~
 wren_b => ~NO_FANOUT~
@@ -376,7 +409,7 @@ eccstatus[1] <= <GND>
 eccstatus[2] <= <GND>
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|altsyncram:altsyncram4|altsyncram_d7r:auto_generated
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|altsyncram:altsyncram4|altsyncram_d7r:auto_generated
 address_a[0] => ram_block1a0.PORTAADDR
 address_a[1] => ram_block1a0.PORTAADDR1
 address_a[2] => ram_block1a0.PORTAADDR2
@@ -391,7 +424,7 @@ q_a[0] <= ram_block1a0.PORTADATAOUT
 wren_a => ram_block1a0.PORTAWE
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_add_sub:add_sub5
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_add_sub:add_sub5
 dataa[0] => add_sub_qqa:auto_generated.dataa[0]
 dataa[1] => add_sub_qqa:auto_generated.dataa[1]
 dataa[2] => add_sub_qqa:auto_generated.dataa[2]
@@ -428,7 +461,7 @@ cout <= <GND>
 overflow <= <GND>
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_add_sub:add_sub5|add_sub_qqa:auto_generated
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_add_sub:add_sub5|add_sub_qqa:auto_generated
 cin => op_1.IN18
 cin => op_1.IN19
 dataa[0] => op_1.IN16
@@ -460,7 +493,7 @@ result[7] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
 result[8] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_add_sub:add_sub6
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_add_sub:add_sub6
 dataa[0] => add_sub_t9a:auto_generated.dataa[0]
 dataa[1] => add_sub_t9a:auto_generated.dataa[1]
 dataa[2] => add_sub_t9a:auto_generated.dataa[2]
@@ -494,7 +527,7 @@ cout <= <GND>
 overflow <= <GND>
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_add_sub:add_sub6|add_sub_t9a:auto_generated
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_add_sub:add_sub6|add_sub_t9a:auto_generated
 cin => op_1.IN16
 cin => op_1.IN17
 dataa[0] => op_1.IN14
@@ -515,7 +548,7 @@ result[6] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
 result[7] <= op_1.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_compare:cmpr7
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_compare:cmpr7
 dataa[0] => cmpr_6pd:auto_generated.dataa[0]
 dataa[1] => cmpr_6pd:auto_generated.dataa[1]
 dataa[2] => cmpr_6pd:auto_generated.dataa[2]
@@ -543,7 +576,7 @@ aneb <= <GND>
 ageb <= <GND>
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_compare:cmpr7|cmpr_6pd:auto_generated
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_compare:cmpr7|cmpr_6pd:auto_generated
 aeb <= aeb_result_wire[0].DB_MAX_OUTPUT_PORT_TYPE
 dataa[0] => data_wire[0].IN0
 dataa[1] => data_wire[0].IN0
@@ -563,7 +596,7 @@ datab[6] => data_wire[3].IN1
 datab[7] => data_wire[3].IN1
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr1
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr1
 clock => cntr_c1l:auto_generated.clock
 clk_en => ~NO_FANOUT~
 cnt_en => cntr_c1l:auto_generated.cnt_en
@@ -612,7 +645,7 @@ eq[14] <= <GND>
 eq[15] <= <GND>
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr1|cntr_c1l:auto_generated
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr1|cntr_c1l:auto_generated
 clock => counter_reg_bit[7].CLK
 clock => counter_reg_bit[6].CLK
 clock => counter_reg_bit[5].CLK
@@ -651,7 +684,7 @@ sload => _.IN1
 sload => _.IN1
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr12
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr12
 clock => cntr_c1l:auto_generated.clock
 clk_en => ~NO_FANOUT~
 cnt_en => cntr_c1l:auto_generated.cnt_en
@@ -700,7 +733,7 @@ eq[14] <= <GND>
 eq[15] <= <GND>
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr12|cntr_c1l:auto_generated
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr12|cntr_c1l:auto_generated
 clock => counter_reg_bit[7].CLK
 clock => counter_reg_bit[6].CLK
 clock => counter_reg_bit[5].CLK
@@ -739,7 +772,7 @@ sload => _.IN1
 sload => _.IN1
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr13
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr13
 clock => cntr_3kj:auto_generated.clock
 clk_en => ~NO_FANOUT~
 cnt_en => cntr_3kj:auto_generated.cnt_en
@@ -784,7 +817,7 @@ eq[14] <= <GND>
 eq[15] <= <GND>
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr13|cntr_3kj:auto_generated
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr13|cntr_3kj:auto_generated
 clock => counter_reg_bit[5].CLK
 clock => counter_reg_bit[4].CLK
 clock => counter_reg_bit[3].CLK
@@ -808,7 +841,7 @@ sload => _.IN1
 sload => counter_reg_bit[5].IN1
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr14
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr14
 clock => cntr_2kj:auto_generated.clock
 clk_en => ~NO_FANOUT~
 cnt_en => cntr_2kj:auto_generated.cnt_en
@@ -851,7 +884,7 @@ eq[14] <= <GND>
 eq[15] <= <GND>
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr14|cntr_2kj:auto_generated
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr14|cntr_2kj:auto_generated
 clock => counter_reg_bit[4].CLK
 clock => counter_reg_bit[3].CLK
 clock => counter_reg_bit[2].CLK
@@ -872,7 +905,7 @@ sload => _.IN1
 sload => counter_reg_bit[4].IN1
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr15
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr15
 clock => cntr_c1l:auto_generated.clock
 clk_en => ~NO_FANOUT~
 cnt_en => cntr_c1l:auto_generated.cnt_en
@@ -921,7 +954,7 @@ eq[14] <= <GND>
 eq[15] <= <GND>
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr15|cntr_c1l:auto_generated
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr15|cntr_c1l:auto_generated
 clock => counter_reg_bit[7].CLK
 clock => counter_reg_bit[6].CLK
 clock => counter_reg_bit[5].CLK
@@ -960,7 +993,7 @@ sload => _.IN1
 sload => _.IN1
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr2
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr2
 clock => cntr_idj:auto_generated.clock
 clk_en => ~NO_FANOUT~
 cnt_en => cntr_idj:auto_generated.cnt_en
@@ -1009,7 +1042,7 @@ eq[14] <= <GND>
 eq[15] <= <GND>
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr2|cntr_idj:auto_generated
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr2|cntr_idj:auto_generated
 clock => counter_reg_bit[7].CLK
 clock => counter_reg_bit[6].CLK
 clock => counter_reg_bit[5].CLK
@@ -1039,7 +1072,7 @@ sload => _.IN1
 sload => counter_reg_bit[7].IN1
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr3
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr3
 clock => cntr_2kj:auto_generated.clock
 clk_en => ~NO_FANOUT~
 cnt_en => cntr_2kj:auto_generated.cnt_en
@@ -1082,7 +1115,7 @@ eq[14] <= <GND>
 eq[15] <= <GND>
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr3|cntr_2kj:auto_generated
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_counter:cntr3|cntr_2kj:auto_generated
 clock => counter_reg_bit[4].CLK
 clock => counter_reg_bit[3].CLK
 clock => counter_reg_bit[2].CLK
@@ -1103,7 +1136,7 @@ sload => _.IN1
 sload => counter_reg_bit[4].IN1
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_decode:decode11
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_decode:decode11
 data[0] => decode_bbf:auto_generated.data[0]
 data[1] => decode_bbf:auto_generated.data[1]
 data[2] => decode_bbf:auto_generated.data[2]
@@ -1118,7 +1151,7 @@ eq[3] <= decode_bbf:auto_generated.eq[3]
 eq[4] <= decode_bbf:auto_generated.eq[4]
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_decode:decode11|decode_bbf:auto_generated
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL_CONFIG:pll_config|PLL_CONFIG_pllrcfg_66q:PLL_CONFIG_pllrcfg_66q_component|lpm_decode:decode11|decode_bbf:auto_generated
 data[0] => w_anode19w[1].IN1
 data[0] => w_anode1w[1].IN0
 data[0] => w_anode30w[1].IN0
@@ -1150,7 +1183,7 @@ eq[3] <= w_anode41w[3].DB_MAX_OUTPUT_PORT_TYPE
 eq[4] <= w_anode52w[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|IF_CLK:lo_a
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL:pll_module
 areset => areset.IN1
 configupdate => configupdate.IN1
 inclk0 => sub_wire6[0].IN1
@@ -1163,13 +1196,13 @@ scandataout <= altpll:altpll_component.scandataout
 scandone <= altpll:altpll_component.scandone
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|IF_CLK:lo_a|altpll:altpll_component
-inclk[0] => IF_CLK_altpll1:auto_generated.inclk[0]
-inclk[1] => IF_CLK_altpll1:auto_generated.inclk[1]
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL:pll_module|altpll:altpll_component
+inclk[0] => PLL_altpll:auto_generated.inclk[0]
+inclk[1] => PLL_altpll:auto_generated.inclk[1]
 fbin => ~NO_FANOUT~
 pllena => ~NO_FANOUT~
 clkswitch => ~NO_FANOUT~
-areset => IF_CLK_altpll1:auto_generated.areset
+areset => PLL_altpll:auto_generated.areset
 pfdena => ~NO_FANOUT~
 clkena[0] => ~NO_FANOUT~
 clkena[1] => ~NO_FANOUT~
@@ -1181,19 +1214,19 @@ extclkena[0] => ~NO_FANOUT~
 extclkena[1] => ~NO_FANOUT~
 extclkena[2] => ~NO_FANOUT~
 extclkena[3] => ~NO_FANOUT~
-scanclk => IF_CLK_altpll1:auto_generated.scanclk
-scanclkena => IF_CLK_altpll1:auto_generated.scanclkena
+scanclk => PLL_altpll:auto_generated.scanclk
+scanclkena => PLL_altpll:auto_generated.scanclkena
 scanaclr => ~NO_FANOUT~
 scanread => ~NO_FANOUT~
 scanwrite => ~NO_FANOUT~
-scandata => IF_CLK_altpll1:auto_generated.scandata
+scandata => PLL_altpll:auto_generated.scandata
 phasecounterselect[0] => ~NO_FANOUT~
 phasecounterselect[1] => ~NO_FANOUT~
 phasecounterselect[2] => ~NO_FANOUT~
 phasecounterselect[3] => ~NO_FANOUT~
 phaseupdown => ~NO_FANOUT~
 phasestep => ~NO_FANOUT~
-configupdate => IF_CLK_altpll1:auto_generated.configupdate
+configupdate => PLL_altpll:auto_generated.configupdate
 fbmimicbidir <> <GND>
 clk[0] <= clk[0].DB_MAX_OUTPUT_PORT_TYPE
 clk[1] <= clk[1].DB_MAX_OUTPUT_PORT_TYPE
@@ -1210,9 +1243,9 @@ enable1 <= <GND>
 enable0 <= <GND>
 activeclock <= <GND>
 clkloss <= <GND>
-locked <= IF_CLK_altpll1:auto_generated.locked
-scandataout <= IF_CLK_altpll1:auto_generated.scandataout
-scandone <= IF_CLK_altpll1:auto_generated.scandone
+locked <= PLL_altpll:auto_generated.locked
+scandataout <= PLL_altpll:auto_generated.scandataout
+scandone <= PLL_altpll:auto_generated.scandone
 sclkout0 <= <GND>
 sclkout1 <= <GND>
 phasedone <= <GND>
@@ -1223,7 +1256,7 @@ fref <= <GND>
 icdrclk <= <GND>
 
 
-|SDR_REV_A|IF_SYNTH:if_synth|IF_CLK:lo_a|altpll:altpll_component|IF_CLK_altpll1:auto_generated
+|SDR_REV_A|IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL:pll_module|altpll:altpll_component|PLL_altpll:auto_generated
 areset => pll_lock_sync.ACLR
 areset => pll1.ARESET
 clk[0] <= pll1.CLK

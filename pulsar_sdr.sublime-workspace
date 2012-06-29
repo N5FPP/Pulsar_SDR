@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"lo",
+				"lo_clk"
+			],
+			[
 				"cou",
 				"counter_type"
 			],
@@ -88,13 +92,10 @@
 			}
 		},
 		{
-			"contents": "\n//=======================================================\n//  This code implements a variable frequency synthesizer\n//	 using one of the built in PLLs and decoding logic to\n//  created quadrature signals\n//  \n//  Copyright Lee Szuba 2012\n//=======================================================\n\n\nmodule IF_SYNTH( input clk,\n				 output [3:0] quad_out,\n				 input  [8:0] if_freq,\n				 input  freq_strobe,\n				 output locked );\n	// clk\n	// Main system clock\n	//\n	// quad_out\n	// Output of quadrature signal to analog switches\n	// used to sample radio signal\n	// 1-4 demultiplexed signal\n	// with one output active at a time\n	// and 90 degree out of phase signals at 1/4\n	// of the pll clock frequency\n	//\n	// if_freq\n	// Desired if output frequency\n	//\n	// freq_strobe\n	// Input to command the PLL to switch frequencies\n	//\n	// locked\n	// Output signalling the PLL is reconfigured and locked\n\n\n\n	wire pll_areset,\n		 pll_configupdate,\n		 pll_scanclk,\n		 pll_scanclkena,\n		 pll_scandata,\n		 pll_scandataout,\n		 pll_scandone;\n\n	wire [2:0] counter_param = 3'b111; //Nominal division ratio setting\n	wire [3:0] counter_type = 4'b0001; //M (loop) counter\n\n	PLL_CONFIG pll_config( \n					.busy(busy),\n					.clock(clk), //Main system clock\n					.counter_param(counter_param),\n					.counter_type(counter_type),\n					.data_in(if_freq),\n					.pll_areset(pll_areset),       \n					.pll_areset_in(pll_reset), //PLL reset\n					.pll_configupdate(pll_configupdate),\n					.pll_scanclk(pll_scanclk),\n					.pll_scanclkena(pll_scanclkena),\n					.pll_scandata(pll_scandata),\n					.pll_scandataout(pll_scandataout),\n					.pll_scandone(pll_scandone),\n					.reconfig(reconfig),\n					.write_param(write_param) );\n	\n	// PLL module\n	IF_CLK lo_a( \n			  .areset(pll_areset),\n			  .configupdate(pll_configupdate),\n			  .inclk0(clk), //PLL input clock, main system clock\n			  .scanclk(pll_scanclk),\n			  .scanclkena(pll_scanclkena),\n			  .scandata(pll_scandata),\n			  .c0(lo_clk_signal), //PLL output signal\n			  .locked(pll_lock),\n			  .scandataout(pll_scandataout),\n			  .scandone(pll_scandone) );\n\n	\n	\n	// This code implements a two bit binary counter and\n   // a 1-4 demultiplexer used to create intermediate\n   // frequencies in the radio receiver\n   //\n   // The four quadrature signals are created directly to\n   // output to the analog switches\n	// Note the quadrature generator divides by 4 so the IF\n	// clock has to be four times faster than the output\n	\n	// Binary counter, 2 bits wide\n	reg [1:0] counter;\n	always @(posedge lo_clk_signal) counter <= counter + 1'b1;\n	// 2-4 demultiplexer\n	assign quad_out = (1'b1 << counter);\n	\nendmodule",
 			"file": "IF_SYNTH.v",
-			"file_size": 4466,
-			"file_write_time": 129846369187454380,
 			"settings":
 			{
-				"buffer_size": 2616,
+				"buffer_size": 1516,
 				"line_ending": "Windows"
 			}
 		},
@@ -114,6 +115,38 @@
 			"settings":
 			{
 				"buffer_size": 4185,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "PLL_AND_RECONFIG.v",
+			"settings":
+			{
+				"buffer_size": 4079,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "FIFO.v",
+			"settings":
+			{
+				"buffer_size": 6883,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/DE0_NANO.v",
+			"settings":
+			{
+				"buffer_size": 5205,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/ADC_CTRL.v",
+			"settings":
+			{
+				"buffer_size": 1993,
 				"line_ending": "Windows"
 			}
 		}
@@ -146,6 +179,7 @@
 	},
 	"file_history":
 	[
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/SPIPLL.v",
 		"/C/Repositories/Pulsar_SDR/IF_CLK.v",
 		"/C/Repositories/Pulsar_SDR/PLL.v",
 		"/C/Repositories/Pulsar_SDR/IF_CLK_bb.v",
@@ -198,7 +232,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -213,8 +247,8 @@
 						"selection":
 						[
 							[
-								665,
-								665
+								423,
+								423
 							]
 						],
 						"settings":
@@ -233,15 +267,15 @@
 					"file": "IF_SYNTH.v",
 					"settings":
 					{
-						"buffer_size": 2616,
+						"buffer_size": 1516,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2067,
-								2067
+								1135,
+								1135
 							]
 						],
 						"settings":
@@ -250,7 +284,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 653.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -285,7 +319,7 @@
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -300,8 +334,8 @@
 						"selection":
 						[
 							[
-								4174,
-								4174
+								2943,
+								2943
 							]
 						],
 						"settings":
@@ -310,7 +344,116 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1575.0,
+						"translation.y": 2061.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "PLL_AND_RECONFIG.v",
+					"settings":
+					{
+						"buffer_size": 4079,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SystemVerilog/SystemVerilog.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "FIFO.v",
+					"settings":
+					{
+						"buffer_size": 6883,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SystemVerilog/SystemVerilog.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 629.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/DE0_NANO.v",
+					"settings":
+					{
+						"buffer_size": 5205,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SystemVerilog/SystemVerilog.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3024.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/ADC_CTRL.v",
+					"settings":
+					{
+						"buffer_size": 1993,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								963,
+								963
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SystemVerilog/SystemVerilog.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 504.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

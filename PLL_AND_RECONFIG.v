@@ -31,15 +31,18 @@ module PLL_AND_RECONFIG( input        clk,
 
     wire reconfig_busy;
     wire [8:0] data_in;
+	 
+	 wire reconfig = 1'b0;
+	 wire write_param = 1'b0;
 
-    reg pll_reset,
+    /*reg pll_reset,
         write_param,
         reconfig;
-
+    */
     reg [2:0] counter_param;
     reg [3:0] counter_type;
-    reg [7:0] state;
-
+    reg [7:0] state = 8'b00000000;
+    /*
     always @(posedge clk)
         case(state)
             0:  begin
@@ -84,7 +87,7 @@ module PLL_AND_RECONFIG( input        clk,
                     state <= 0;
                 end
         endcase
-
+    */
 
 	wire pll_areset,
 		 pll_configupdate,

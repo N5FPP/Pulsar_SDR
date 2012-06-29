@@ -14,7 +14,7 @@ module HEARTBEAT( input clk,
 	reg beat;
 	reg [31:0] counter;
 	
-	parameter CLK_DIV = 50000000;
+	parameter CLK_DIV = 10000000;
 	
 	always @(posedge clk) if(counter==CLK_DIV) counter <= 0; else counter <= counter+1;
 	
