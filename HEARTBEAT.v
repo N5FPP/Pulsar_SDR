@@ -9,18 +9,18 @@
 //=======================================================
 
 module HEARTBEAT( input clk,
-						output beat_out );
-	
-	reg beat;
-	reg [31:0] counter;
-	
-	parameter CLK_DIV = 10000000;
-	
-	always @(posedge clk) if(counter==CLK_DIV) counter <= 0; else counter <= counter+1;
-	
-	// Divide by 2 to give a 50 percent duty cycle
-	always @(posedge clk) if(counter==CLK_DIV) beat <= ~beat;
-	
-	assign beat_out = beat;
+                        output beat_out );
+    
+    reg beat;
+    reg [31:0] counter;
+    
+    parameter CLK_DIV = 10000000;
+    
+    always @(posedge clk) if(counter==CLK_DIV) counter <= 0; else counter <= counter+1;
+    
+    // Divide by 2 to give a 50 percent duty cycle
+    always @(posedge clk) if(counter==CLK_DIV) beat <= ~beat;
+    
+    assign beat_out = beat;
 
 endmodule

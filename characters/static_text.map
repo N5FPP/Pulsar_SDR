@@ -1,0 +1,20 @@
+%
+% This file defines the static text to be output to the VGA monitor
+% Static text can be overwritten by writing to the same location
+% in character RAM
+%
+% The character RAM is 100x36, text should not exceed that
+% The character RAM is 8192 8-bit words
+%
+% The '`' character inserts a solid block
+%
+% Copyright Lee Szuba 2012
+%
+%
+%%% START OF DATA %%%
+%        |10       |20       |30       |40       |50       |60       |70       |80       |90       |100
+ ``````````````````````````````````````````````````````````````````````````````````````````````````
+ ```````                                                                                    ```````
+ ```````           SDR REV 1.0      Lee Szuba 2012      Frequency: 49.999999 MHz            ```````
+ ```````                                                                                    ```````
+ ``````````````````````````````````````````````````````````````````````````````````````````````````

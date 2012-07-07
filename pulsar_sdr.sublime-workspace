@@ -4,6 +4,190 @@
 		"selected_items":
 		[
 			[
+				"T",
+				"TextMap"
+			],
+			[
+				"cha",
+				"char_y"
+			],
+			[
+				"w",
+				"char_wren"
+			],
+			[
+				"ch",
+				"char_y"
+			],
+			[
+				"char",
+				"char_x"
+			],
+			[
+				"Te",
+				"TEXT_H_START"
+			],
+			[
+				"h",
+				"hCharPos4"
+			],
+			[
+				"hCha",
+				"hCharPos1"
+			],
+			[
+				"v",
+				"vCharPos2"
+			],
+			[
+				"hChar",
+				"hCharPos"
+			],
+			[
+				"H",
+				"H_MAX-1"
+			],
+			[
+				"Chars",
+				"Chars"
+			],
+			[
+				"vert",
+				"vertChar"
+			],
+			[
+				"pos",
+				"posedge"
+			],
+			[
+				"horzCHar",
+				"horzCharPos"
+			],
+			[
+				"vertCHar",
+				"vertCharPos"
+			],
+			[
+				"write",
+				"writeFile"
+			],
+			[
+				"s",
+				"split"
+			],
+			[
+				"HE",
+				"HexMap"
+			],
+			[
+				"out",
+				"outName"
+			],
+			[
+				"file",
+				"fileName"
+			],
+			[
+				"font",
+				"fontRomOut"
+			],
+			[
+				"end",
+				"end"
+			],
+			[
+				"TE",
+				"TEXT_ROWS"
+			],
+			[
+				"text",
+				"textVertCnt"
+			],
+			[
+				"te",
+				"textVertCnt"
+			],
+			[
+				"TEXT_V",
+				"TEXT_V_END"
+			],
+			[
+				"TEXT",
+				"TEXT_V_START"
+			],
+			[
+				"TEXT_H",
+				"TEXT_H_END"
+			],
+			[
+				"TEX",
+				"TEXT_H_START"
+			],
+			[
+				"ho",
+				"horzEn"
+			],
+			[
+				"ver",
+				"vertEn"
+			],
+			[
+				"count",
+				"counter"
+			],
+			[
+				"cl",
+				"CLK_DIV"
+			],
+			[
+				"HSY",
+				"HSYNC_END"
+			],
+			[
+				"h_",
+				"h_count"
+			],
+			[
+				"V",
+				"VSYNC"
+			],
+			[
+				"H_S",
+				"HSYNC_START"
+			],
+			[
+				"v_",
+				"v_count"
+			],
+			[
+				"p",
+				"pclk"
+			],
+			[
+				"hor",
+				"horz_en"
+			],
+			[
+				"c",
+				"colour"
+			],
+			[
+				"gp",
+				"GPIO_0"
+			],
+			[
+				"GPIO",
+				"GPIO_0"
+			],
+			[
+				"hr",
+				"horz_en"
+			],
+			[
+				"clk",
+				"CLOCK_50"
+			],
+			[
 				"lo",
 				"lo_clk"
 			],
@@ -48,10 +232,6 @@
 				"strobe_latch"
 			],
 			[
-				"out",
-				"output"
-			],
-			[
 				"con",
 				"_config_busy"
 			],
@@ -84,69 +264,49 @@
 	"buffers":
 	[
 		{
-			"file": "HEARTBEAT.v",
+			"file": "/C/Repositories/VGA_test/characters/char_ram_load.py",
 			"settings":
 			{
-				"buffer_size": 665,
+				"buffer_size": 2129,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "IF_SYNTH.v",
+			"contents": "//=======================================================\n//  This code tests the VGA signal generator module\n//\n//  Five output signals are to be connected to the\n//  corresponding pins on a VGA monitor\n//\n//  Copyright Lee Szuba 2012\n//=======================================================\n\n\nmodule VGA_test(\n\n    //////////// CLOCK //////////\n    CLOCK_50,\n\n    //////////// LED //////////\n    LED,\n\n    //////////// KEY //////////\n    KEY,\n\n    //////////// SW //////////\n    SW,\n\n    //////////// SDRAM //////////\n    DRAM_ADDR,\n    DRAM_BA,\n    DRAM_CAS_N,\n    DRAM_CKE,\n    DRAM_CLK,\n    DRAM_CS_N,\n    DRAM_DQ,\n    DRAM_DQM,\n    DRAM_RAS_N,\n    DRAM_WE_N,\n\n    //////////// ADC //////////\n    ADC_CS_N,\n    ADC_SADDR,\n    ADC_SCLK,\n    ADC_SDAT,\n\n    //////////// 2x13 GPIO Header //////////\n    GPIO_2,\n    GPIO_2_IN,\n\n    //////////// GPIO_0, GPIO_0 connect to GPIO Default //////////\n    GPIO_0,\n    GPIO_0_IN,\n\n    //////////// GPIO_1, GPIO_1 connect to GPIO Default //////////\n    GPIO_1,\n    GPIO_1_IN\n);\n\n//=======================================================\n//  PARAMETER declarations\n//=======================================================\n\n\n//=======================================================\n//  PORT declarations\n//=======================================================\n\n//////////// CLOCK //////////\ninput                       CLOCK_50;\n\n//////////// LED //////////\noutput           [7:0]      LED;\n\n//////////// KEY //////////\ninput            [1:0]      KEY;\n\n//////////// SW //////////\ninput            [3:0]      SW;\n\n//////////// SDRAM //////////\noutput          [12:0]      DRAM_ADDR;\noutput           [1:0]      DRAM_BA;\noutput                      DRAM_CAS_N;\noutput                      DRAM_CKE;\noutput                      DRAM_CLK;\noutput                      DRAM_CS_N;\ninout           [15:0]      DRAM_DQ;\noutput           [1:0]      DRAM_DQM;\noutput                      DRAM_RAS_N;\noutput                      DRAM_WE_N;\n\n//////////// ADC //////////\noutput                      ADC_CS_N;\noutput                      ADC_SADDR;\noutput                      ADC_SCLK;\ninput                       ADC_SDAT;\n\n//////////// 2x13 GPIO Header //////////\ninout           [12:0]      GPIO_2;\ninput            [2:0]      GPIO_2_IN;\n\n//////////// GPIO_0, GPIO_0 connect to GPIO Default //////////\ninout           [33:0]      GPIO_0;\ninput            [1:0]      GPIO_0_IN;\n\n//////////// GPIO_1, GPIO_1 connect to GPIO Default //////////\ninout           [33:0]      GPIO_1;\ninput            [1:0]      GPIO_1_IN;\n\n\n//=======================================================\n//  REG/WIRE declarations\n//=======================================================\n\nparameter TEXT_H_START = 20,\n          TEXT_V_START = 10;\n\n\nwire clk = CLOCK_50;\nwire beat_out;\n\n//=======================================================\n//  Structural coding\n//=======================================================\n\nHEARTBEAT heartbeat(.clk(clk), .beat_out(beat_out));\n\nassign LED[7] = beat_out;\n\n\n\nVGA vga(.clk(clk),\n        .red(GPIO_0[19]),\n        .green(GPIO_0[21]),\n        .blue(GPIO_0[23]),\n        .h_sync(GPIO_0[17]),\n        .v_sync(GPIO_0[15]),\n        .char_data(/*char*/0),\n        .char_h_addr(/*char_x + TEXT_H_START*/0),\n        .char_v_addr(/*char_y + TEXT_V_START*/0),\n        .char_wren(wren));\n\nendmodule\n",
+			"file": "/C/Repositories/VGA_test/VGA_test.v",
+			"file_size": 3502,
+			"file_write_time": 129861057460530837,
 			"settings":
 			{
-				"buffer_size": 1516,
+				"buffer_size": 3342,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "DEBOUNCER.v",
+			"file": "/C/Repositories/VGA_test/characters/static_text.map",
 			"settings":
 			{
-				"buffer_size": 1466,
-				"line_ending": "Windows"
+				"buffer_size": 957,
+				"line_ending": "Windows",
+				"name": "#"
 			}
 		},
 		{
-			"contents": "\n//=======================================================\n//  This code is template generated by\n//  Terasic System Builder\n//=======================================================\n\n\n//=======================================================\n//  This code implements a software defined radio based\n//  on the DEO Nano board\n//\n//  Copyright Lee Szuba 2012\n//=======================================================\n\n\nmodule SDR_REV_A(\n\n		//////////// CLOCK //////////\n		CLOCK_50,\n\n		//////////// LED //////////\n		LED,\n\n		//////////// KEY //////////\n		KEY,\n\n		//////////// SW //////////\n		SW,\n\n		//////////// EPCS //////////\n		EPCS_ASDO,\n		EPCS_DATA0,\n		EPCS_DCLK,\n		EPCS_NCSO,\n\n		//////////// 2x13 GPIO Header //////////\n		GPIO_2,\n		GPIO_2_IN,\n\n		//////////// GPIO_0, GPIO_0 connect to GPIO Default //////////\n		A,\n		A_IN,\n\n		//////////// GPIO_1, GPIO_1 connect to GPIO Default //////////\n		B,\n		B_IN\n	);\n\n	//=======================================================\n	//  PARAMETER declarations\n	//=======================================================\n\n\n	//=======================================================\n	//  PORT declarations\n	//=======================================================\n\n	//////////// CLOCK //////////\n	input 		          		CLOCK_50;\n\n	//////////// LED //////////\n	output		     [7:0]		LED;\n\n	//////////// KEY //////////\n	input 		     [1:0]		KEY;\n\n	//////////// SW //////////\n	input 		     [3:0]		SW;\n\n	//////////// EPCS //////////\n	output		          		EPCS_ASDO;\n	input 		          		EPCS_DATA0;\n	output		          		EPCS_DCLK;\n	output		          		EPCS_NCSO;\n\n	//////////// 2x13 GPIO Header //////////\n	inout 		    [12:0]		GPIO_2;\n	input 		     [2:0]		GPIO_2_IN;\n\n	//////////// GPIO_0, GPIO_0 connect to GPIO Default //////////\n	inout 		    [33:0]		A;\n	input 		     [1:0]		A_IN;\n\n	//////////// GPIO_1, GPIO_1 connect to GPIO Default //////////\n	inout 		    [33:0]		B;\n	input 		     [1:0]		B_IN;\n\n\n	//=======================================================\n	//  REG/WIRE declarations\n	//=======================================================\n\n	// Alias the 50 MHz system clock to a signal just in case\n	// a PLL is later used to synthesize a faster clock rate\n	// in the future\n	wire clk = CLOCK_50;\n\n	// Clock outputs\n	wire [3:0] l_osc;\n	wire lo_lock;\n\n	// Heartbeat signal\n	wire beat_out;\n\n	// Outputs to LCD\n	wire LCD_E;\n	wire LCD_RS;\n	wire [7:0] LCD_DATA;\n\n	// Center tuning frequency -- the current PLL frequency\n	reg [8:0] tuning;\n	reg lo_strobe;\n	\n	wire up_button_press, down_button_press, down_pressed, up_pressed;\n	\n\n	parameter TUNING_STEP = 9'b00010000;\n\n	//=======================================================\n	//  Structural coding\n	//=======================================================\n\n\n	// Human interface\n	// One button raises the clock frequency, the other\n	// lowers it. To be used to tune the device\n	// 256 discrete values to start, depending on the tuning\n	// range, this may be increased\n\n	DEBOUNCER freq_up( .clk(clk), .button(KEY[0]), .button_down(up_button_press), .button_pressed(up_pressed) );\n	DEBOUNCER freq_down( .clk(clk), .button(KEY[1]), .button_down(down_button_press), .button_pressed(down_pressed) );\n\n	assign LED[4] = down_pressed || up_pressed;\n\n	always @(posedge clk)\n		begin\n			if(up_button_press)\n				begin\n					tuning <= tuning + TUNING_STEP;\n					lo_strobe <= 1'b1;\n				end\n			else if(down_button_press)\n				begin\n					tuning <= tuning - TUNING_STEP;\n					lo_strobe <= 1'b1;\n				end\n			else lo_strobe <= 1'b0;\n		end //Tuning counter control\n\n	assign LED[3:0] = tuning[8:5];\n\n	// Module to take clock frequency and synthesize\n	// quadrature outputs at adjustable frequency\n	IF_SYNTH if_synth( .clk(clk), .quad_out(l_osc), .if_freq(tuning),\n					   .freq_strobe(lo_strobe), .locked(lo_lock) );\n\n	// Quadrature signal on GPIO-1, pins 0,1,3,5\n	assign {B[5], B[3], B[1:0]} = l_osc[3:0];\n\n	// LED 7 indicates the PLL has locked to it's target\n	// frequency\n	assign LED[6] = lo_lock;x\n	\n	// Generate a simple heartbeat signal on one of the on-\n	// board LEDs (LED 0) to indicate the fpga is active\n	// Frequency < 1Hz\n	HEARTBEAT sdr_heartbeat( .clk(clk), .beat_out(beat_out) );\n	assign LED[7] = beat_out;\n	\nendmodule\n",
+			"file": "/C/Repositories/VGA_test/characters/chars.map",
+			"settings":
+			{
+				"buffer_size": 22686,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "\n//=======================================================\n//  This code is template generated by\n//  Terasic System Builder\n//=======================================================\n\n\n//=======================================================\n//  This code implements a software defined radio based\n//  on the DEO Nano board\n//\n//  Copyright Lee Szuba 2012\n//=======================================================\n\n\nmodule SDR_REV_A(\n\n		//////////// CLOCK //////////\n		CLOCK_50,\n\n		//////////// LED //////////\n		LED,\n\n		//////////// KEY //////////\n		KEY,\n\n		//////////// SW //////////\n		SW,\n\n		//////////// EPCS //////////\n		EPCS_ASDO,\n		EPCS_DATA0,\n		EPCS_DCLK,\n		EPCS_NCSO,\n\n		//////////// 2x13 GPIO Header //////////\n		GPIO_2,\n		GPIO_2_IN,\n\n		//////////// GPIO_0, GPIO_0 connect to GPIO Default //////////\n		A,\n		A_IN,\n\n		//////////// GPIO_1, GPIO_1 connect to GPIO Default //////////\n		B,\n		B_IN\n	);\n\n	//=======================================================\n	//  PARAMETER declarations\n	//=======================================================\n\n\n	//=======================================================\n	//  PORT declarations\n	//=======================================================\n\n	//////////// CLOCK //////////\n	input 		          		CLOCK_50;\n\n	//////////// LED //////////\n	output		     [7:0]		LED;\n\n	//////////// KEY //////////\n	input 		     [1:0]		KEY;\n\n	//////////// SW //////////\n	input 		     [3:0]		SW;\n\n	//////////// EPCS //////////\n	output		          		EPCS_ASDO;\n	input 		          		EPCS_DATA0;\n	output		          		EPCS_DCLK;\n	output		          		EPCS_NCSO;\n\n	//////////// 2x13 GPIO Header //////////\n	inout 		    [12:0]		GPIO_2;\n	input 		     [2:0]		GPIO_2_IN;\n\n	//////////// GPIO_0, GPIO_0 connect to GPIO Default //////////\n	inout 		    [33:0]		A;\n	input 		     [1:0]		A_IN;\n\n	//////////// GPIO_1, GPIO_1 connect to GPIO Default //////////\n	inout 		    [33:0]		B;\n	input 		     [1:0]		B_IN;\n\n\n	//=======================================================\n	//  REG/WIRE declarations\n	//=======================================================\n\n	// Alias the 50 MHz system clock to a signal just in case\n	// a PLL is later used to synthesize a faster clock rate\n	// in the future\n	wire clk = CLOCK_50;\n\n	// Clock outputs\n	wire [3:0] l_osc;\n	wire lo_lock;\n\n	// Heartbeat signal\n	wire beat_out;\n\n	// Outputs to LCD\n	wire LCD_E;\n	wire LCD_RS;\n	wire [7:0] LCD_DATA;\n\n	// Center tuning frequency -- the current PLL frequency\n	reg [8:0] tuning;\n	reg lo_strobe;\n\n	reg [11:0] state, nextState;\n\n	wire up_button_press, down_button_press, down_pressed, up_pressed;\n\n\n	parameter TUNING_STEP = 9'b00010000;\n\n	//=======================================================\n	//  Structural coding\n	//=======================================================\n\n\n	// Human interface\n	// One button raises the clock frequency, the other\n	// lowers it. To be used to tune the device\n	// 256 discrete values to start, depending on the tuning\n	// range, this may be increased\n\n	DEBOUNCER freq_up( .clk(clk), .button(KEY[0]), .button_down(up_button_press), .button_pressed(up_pressed) );\n	DEBOUNCER freq_down( .clk(clk), .button(KEY[1]), .button_down(down_button_press), .button_pressed(down_pressed) );\n\n	assign LED[4] = down_pressed || up_pressed;\n\n	always @(posedge clk)\n	begin\n		if(up_button_press)\n			begin\n				tuning <= tuning + TUNING_STEP;\n				lo_strobe <= 1'b1;\n			end\n		else if(down_button_press)\n			begin\n				tuning <= tuning - TUNING_STEP;\n				lo_strobe <= 1'b1;\n			end\n		else lo_strobe <= 1'b0;\n	end //Tuning counter control\n\n\n	// Frequency display starts at column 67, row 2\n	always @(posedge clk) begin\n		v_addr <= 2;\n\n		case state\n			0:	if (lo_strobe)\n			    	nextState <= 1;\n			1: 	h_addr <= 67;\n			2: 	h_addr <= 68;\n			3: 	h_addr <= 70;\n			4: 	h_addr <= 71;\n			5: 	h_addr <= 72;\n			6: 	h_addr <= 73;\n			7: 	h_addr <= 74;\n			8: 	h_addr <= 75;\n			default: h_addr <= 0;\n	\n	    end\n	end\n\n    VGA vga(.clk(clk),\n        .red(GPIO_0[19]),\n        .green(GPIO_0[21]),\n        .blue(GPIO_0[23]),\n        .h_sync(GPIO_0[17]),\n        .v_sync(GPIO_0[15]),\n        .char_data(/*char*/0),\n        .char_h_addr(h_addr),\n        .char_v_addr(v_addr),\n        .char_wren(wren));\n\n	// Module to take clock frequency and synthesize\n	// quadrature outputs at adjustable frequency\n	IF_SYNTH if_synth( .clk(clk), .quad_out(l_osc), .if_freq(tuning),\n					   .freq_strobe(lo_strobe), .locked(lo_lock) );\n\n	// Quadrature signal on GPIO-1, pins 0,1,3,5\n	assign {B[5], B[3], B[1:0]} = l_osc[3:0];\n\n	// LED 7 indicates the PLL has locked to it's target\n	// frequency\n	assign LED[6] = lo_lock;\n\n	// Generate a simple heartbeat signal on one of the on-\n	// board LEDs (LED 0) to indicate the fpga is active\n	// Frequency < 1Hz\n	HEARTBEAT sdr_heartbeat( .clk(clk), .beat_out(beat_out) );\n	assign LED[7] = beat_out;\n\nendmodule\n",
 			"file": "SDR_REV_A.v",
-			"file_size": 4668,
-			"file_write_time": 129845595728881680,
+			"file_size": 4640,
+			"file_write_time": 129861088566869758,
 			"settings":
 			{
-				"buffer_size": 4185,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "PLL_AND_RECONFIG.v",
-			"settings":
-			{
-				"buffer_size": 4079,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "FIFO.v",
-			"settings":
-			{
-				"buffer_size": 6883,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/DE0_NANO.v",
-			"settings":
-			{
-				"buffer_size": 5205,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/ADC_CTRL.v",
-			"settings":
-			{
-				"buffer_size": 1993,
+				"buffer_size": 4809,
 				"line_ending": "Windows"
 			}
 		}
@@ -157,6 +317,10 @@
 		"height": 311.0,
 		"selected_items":
 		[
+			[
+				":w",
+				":w - Save"
+			],
 			[
 				"Package Control: ",
 				"Package Control: Discover Packages"
@@ -179,11 +343,51 @@
 	},
 	"file_history":
 	[
+		"/C/Repositories/VGA_test/characters/character_ram.mif",
+		"/C/Repositories/Pulsar_SDR/VGA.v",
+		"/C/Repositories/VGA_test/VGA.v",
+		"/C/Repositories/VGA_test/SYNC_GEN.v",
+		"/C/Repositories/VGA_test/characters/char_ram_load.py",
+		"/C/Repositories/VGA_test/characters/character_rom.mif",
+		"/C/Repositories/VGA_test/FONT_ROM.v",
+		"/C/Repositories/VGA_test/CHAR_RAM_bb.v",
+		"/C/Repositories/VGA_test/Examples/hvsync_generator.v",
+		"/C/Repositories/VGA_test/CHAR_RAM.v",
+		"/C/Users/owner/Documents/iClicker/AVR asm/AVR asm/rapidfire asm/gistfile1.asm",
+		"/C/Users/owner/Documents/iClicker/factory_eeprom_b.hex",
+		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/User/verilog.sublime-settings",
+		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/User/JSON.sublime-settings",
+		"/C/Repositories/VGA_test/VGA_old.v",
+		"/C/Repositories/Pulsar_SDR/HEARTBEAT.v",
+		"/C/Repositories/VGA_test/characters/test_output.txt",
+		"/C/Repositories/VGA_test/characters/test_input.txt",
+		"/C/Repositories/VGA_test/fontrom.mif",
+		"/C/Repositories/VGA_test/Examples/yavga/trunk/charmaps/convert.sh",
+		"/C/Repositories/VGA_test/Examples/yavga/trunk/vhdl/vga_ctrl.vhd",
+		"/C/Repositories/VGA_test/Examples/yavga/trunk/charmaps/charmaps_ROM.vhd_tail",
+		"/C/Repositories/VGA_test/Examples/yavga/trunk/charmaps/README.txt",
+		"/C/Repositories/VGA_test/Examples/yavga/trunk/charmaps/charmaps_ROM.vhd",
+		"/C/Repositories/VGA_test/Examples/yavga/trunk/vhdl/chars_RAM.vhd",
+		"/C/Repositories/VGA_test/Examples/yavga/trunk/vhdl/README.txt",
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_Nano_SOPC_DEMO/ip/TERASIC_ADC_READ/TERASIC_ADC_READ.v",
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_Nano_SOPC_DEMO/sdram.v",
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_Nano_GOLDEN_TOP/DE0_Nano.v",
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_default/DE0_NANO.v",
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/ADC_CTRL.v",
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/DE0_NANO.v",
+		"/C/fpga/Heartbeat/tb_heartbeat.vhd",
+		"/C/fpga/Heartbeat/HeartBeat.vhd",
+		"/C/Repositories/Pulsar_SDR/FIFO.v",
+		"/C/Repositories/Pulsar_SDR/PLL_AND_RECONFIG.v",
+		"/C/Repositories/Pulsar_SDR/SDR_REV_A.v",
+		"/C/Repositories/Pulsar_SDR/DEBOUNCER.v",
+		"/C/Repositories/Pulsar_SDR/IF_SYNTH.v",
 		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/SPIPLL.v",
 		"/C/Repositories/Pulsar_SDR/IF_CLK.v",
 		"/C/Repositories/Pulsar_SDR/PLL.v",
 		"/C/Repositories/Pulsar_SDR/IF_CLK_bb.v",
-		"/C/Users/owner/Documents/iClicker/AVR asm/AVR asm/rapidfire asm/gistfile1.asm",
 		"/C/Repositories/Pulsar_SDR/PLL_CONFIG.v",
 		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/User/SystemVerilog.sublime-settings",
 		"/C/Repositories/Pulsar_SDR/Debouncer.v",
@@ -191,11 +395,7 @@
 		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
 		"/C/Users/owner/Downloads/Verilog.sublime-package",
 		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/Verilog/Verilog.sublime-package",
-		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/Package Control/Package Control.sublime-settings",
-		"/C/Repositories/Pulsar_SDR/HEARTBEAT.v",
-		"/C/Repositories/Pulsar_SDR/IF_SYNTH.v",
-		"/C/Repositories/Pulsar_SDR/SDR_REV_A.v",
-		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings"
+		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/Package Control/Package Control.sublime-settings"
 	],
 	"find":
 	{
@@ -213,6 +413,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"fontRomOut",
+			"colour",
+			"pix",
+			"plain",
+			"default",
+			"h_count",
+			"v_count",
 			"pll_lock",
 			"read_param"
 		],
@@ -222,6 +429,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"charLine"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -232,56 +440,85 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "HEARTBEAT.v",
+					"file": "/C/Repositories/VGA_test/characters/char_ram_load.py",
 					"settings":
 					{
-						"buffer_size": 665,
+						"buffer_size": 2129,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								423,
-								423
+								1090,
+								1090
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Verilog/verilog.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 630.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "IF_SYNTH.v",
+					"file": "/C/Repositories/VGA_test/VGA_test.v",
 					"settings":
 					{
-						"buffer_size": 1516,
+						"buffer_size": 3342,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1135,
-								1135
+								3012,
+								3012
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Verilog/verilog.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1638.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Repositories/VGA_test/characters/static_text.map",
+					"settings":
+					{
+						"buffer_size": 957,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								725,
+								725
+							]
+						],
+						"settings":
+						{
+							"auto_name": "#",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -290,28 +527,27 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "DEBOUNCER.v",
+					"buffer": 3,
+					"file": "/C/Repositories/VGA_test/characters/chars.map",
 					"settings":
 					{
-						"buffer_size": 1466,
+						"buffer_size": 22686,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1466,
-								1466
+								16808,
+								16808
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Verilog/verilog.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 31053.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -319,78 +555,23 @@
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "SDR_REV_A.v",
 					"settings":
 					{
-						"buffer_size": 4185,
+						"buffer_size": 4809,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2943,
-								2943
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Verilog/verilog.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2061.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "PLL_AND_RECONFIG.v",
-					"settings":
-					{
-						"buffer_size": 4079,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/SystemVerilog/SystemVerilog.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "FIFO.v",
-					"settings":
-					{
-						"buffer_size": 6883,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
+								3563,
+								3563
 							]
 						],
 						"settings":
@@ -399,61 +580,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 629.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/DE0_NANO.v",
-					"settings":
-					{
-						"buffer_size": 5205,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/SystemVerilog/SystemVerilog.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3024.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/ADC_CTRL.v",
-					"settings":
-					{
-						"buffer_size": 1993,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								963,
-								963
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/SystemVerilog/SystemVerilog.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 504.0,
+						"translation.y": 2358.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -463,7 +590,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 0.0
+		"height": 34.0
 	},
 	"input":
 	{
@@ -489,7 +616,7 @@
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.570056497175,
 			1.0
 		],
 		"rows":
@@ -501,7 +628,7 @@
 	"menu_visible": true,
 	"replace":
 	{
-		"height": 0.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":

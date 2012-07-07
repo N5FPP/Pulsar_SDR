@@ -110,9 +110,9 @@ module SDR_REV_A(
 	// Center tuning frequency -- the current PLL frequency
 	reg [8:0] tuning;
 	reg lo_strobe;
-	
+
 	wire up_button_press, down_button_press, down_pressed, up_pressed;
-	
+
 
 	parameter TUNING_STEP = 9'b00010000;
 
@@ -133,21 +133,33 @@ module SDR_REV_A(
 	assign LED[4] = down_pressed || up_pressed;
 
 	always @(posedge clk)
-		begin
-			if(up_button_press)
-				begin
-					tuning <= tuning + TUNING_STEP;
-					lo_strobe <= 1'b1;
-				end
-			else if(down_button_press)
-				begin
-					tuning <= tuning - TUNING_STEP;
-					lo_strobe <= 1'b1;
-				end
-			else lo_strobe <= 1'b0;
-		end //Tuning counter control
+	begin
+		if(up_button_press)
+			begin
+				tuning <= tuning + TUNING_STEP;
+				lo_strobe <= 1'b1;
+			end
+		else if(down_button_press)
+			begin
+				tuning <= tuning - TUNING_STEP;
+				lo_strobe <= 1'b1;
+			end
+		else lo_strobe <= 1'b0;
+	end //Tuning counter control
 
-	assign LED[3:0] = tuning[8:5];
+
+
+
+    VGA vga(.clk(clk),
+        .red(GPIO_0[19]),
+        .green(GPIO_0[21]),
+        .blue(GPIO_0[23]),
+        .h_sync(GPIO_0[17]),
+        .v_sync(GPIO_0[15]),
+        .char_data(/*char*/0),
+        .char_h_addr(/*char_x + TEXT_H_START*/0),
+        .char_v_addr(/*char_y + TEXT_V_START*/0),
+        .char_wren(wren));
 
 	// Module to take clock frequency and synthesize
 	// quadrature outputs at adjustable frequency
@@ -160,19 +172,11 @@ module SDR_REV_A(
 	// LED 7 indicates the PLL has locked to it's target
 	// frequency
 	assign LED[6] = lo_lock;
-	
+
 	// Generate a simple heartbeat signal on one of the on-
 	// board LEDs (LED 0) to indicate the fpga is active
 	// Frequency < 1Hz
 	HEARTBEAT sdr_heartbeat( .clk(clk), .beat_out(beat_out) );
 	assign LED[7] = beat_out;
 
-
-	/*
-	LCD char_lcd( .clk(clk), .data(lcd_send), .strobe(lcd_strobe), .command_sel(lcd_cmd_sel),
-					  .busy(lcd_busy), .LCD_E(LCD_E), .LCD_RS(LCD_RS), .LCD_DATA(LCD_DATA) );
-	assign B[26] = LCD_E;
-	assign B[24] = LCD_RS;
-	assign {B[16], B[14], B[18], B[12], B[20], B[10], B[22], B[8]} = LCD_DATA[7:0];
-	*/
 endmodule
