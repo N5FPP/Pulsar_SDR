@@ -111,6 +111,8 @@ module SDR_REV_A(
 	reg [8:0] tuning;
 	reg lo_strobe;
 
+	reg [11:0] state, nextState;
+
 	wire up_button_press, down_button_press, down_pressed, up_pressed;
 
 
@@ -148,18 +150,36 @@ module SDR_REV_A(
 	end //Tuning counter control
 
 
+	// Frequency display starts at column 67, row 2
+	// always @(posedge clk) begin
+	// 	v_addr <= 2;
 
+	// 	case state
+	// 		0:	if (lo_strobe)
+	// 		    	nextState <= 1;
+	// 		1: 	h_addr <= 67;
+	// 		2: 	h_addr <= 68;
+	// 		3: 	h_addr <= 70;
+	// 		4: 	h_addr <= 71;
+	// 		5: 	h_addr <= 72;
+	// 		6: 	h_addr <= 73;
+	// 		7: 	h_addr <= 74;
+	// 		8: 	h_addr <= 75;
+	// 		default: h_addr <= 0;
 
-    VGA vga(.clk(clk),
-        .red(GPIO_0[19]),
-        .green(GPIO_0[21]),
-        .blue(GPIO_0[23]),
-        .h_sync(GPIO_0[17]),
-        .v_sync(GPIO_0[15]),
-        .char_data(/*char*/0),
-        .char_h_addr(/*char_x + TEXT_H_START*/0),
-        .char_v_addr(/*char_y + TEXT_V_START*/0),
-        .char_wren(wren));
+	//     end
+	// end
+
+    // VGA vga(.clk(clk),
+    //     .red(GPIO_0[19]),
+    //     .green(GPIO_0[21]),
+    //     .blue(GPIO_0[23]),
+    //     .h_sync(GPIO_0[17]),
+    //     .v_sync(GPIO_0[15]),
+    //     .char_data(/*char*/0),
+    //     .char_h_addr(h_addr),
+    //     .char_v_addr(v_addr),
+    //     .char_wren(wren));
 
 	// Module to take clock frequency and synthesize
 	// quadrature outputs at adjustable frequency
@@ -167,7 +187,7 @@ module SDR_REV_A(
 					   .freq_strobe(lo_strobe), .locked(lo_lock) );
 
 	// Quadrature signal on GPIO-1, pins 0,1,3,5
-	assign {B[5], B[3], B[1:0]} = l_osc[3:0];
+	assign {B[11], B[9], B[13], B[15]} = l_osc[3:0];
 
 	// LED 7 indicates the PLL has locked to it's target
 	// frequency

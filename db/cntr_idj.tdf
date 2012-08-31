@@ -1,8 +1,8 @@
 --lpm_counter CBX_DECLARE_ALL_CONNECTED_PORTS="OFF" DEVICE_FAMILY="Cyclone IV E" lpm_direction="UP" lpm_port_updown="PORT_UNUSED" lpm_width=8 clock cnt_en data q sload CARRY_CHAIN="MANUAL" CARRY_CHAIN_LENGTH=48
---VERSION_BEGIN 10.1 cbx_cycloneii 2010:11:29:22:18:02:SJ cbx_lpm_add_sub 2010:11:29:22:18:02:SJ cbx_lpm_compare 2010:11:29:22:18:02:SJ cbx_lpm_counter 2010:11:29:22:18:02:SJ cbx_lpm_decode 2010:11:29:22:18:02:SJ cbx_mgl 2010:11:29:22:19:52:SJ cbx_stratix 2010:11:29:22:18:02:SJ cbx_stratixii 2010:11:29:22:18:02:SJ  VERSION_END
+--VERSION_BEGIN 12.0 cbx_cycloneii 2012:05:31:20:08:35:SJ cbx_lpm_add_sub 2012:05:31:20:08:35:SJ cbx_lpm_compare 2012:05:31:20:08:35:SJ cbx_lpm_counter 2012:05:31:20:08:35:SJ cbx_lpm_decode 2012:05:31:20:08:35:SJ cbx_mgl 2012:05:31:20:09:47:SJ cbx_stratix 2012:05:31:20:08:35:SJ cbx_stratixii 2012:05:31:20:08:35:SJ  VERSION_END
 
 
--- Copyright (C) 1991-2010 Altera Corporation
+-- Copyright (C) 1991-2012 Altera Corporation
 --  Your use of Altera Corporation's design tools, logic functions 
 --  and other software and tools, and its AMPP partner logic 
 --  functions, and any output files from any of the foregoing 

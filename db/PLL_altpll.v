@@ -1,12 +1,12 @@
-//altpll c0_high=3 c0_initial=1 c0_low=2 c0_mode="ODD" c0_ph=0 CBX_DECLARE_ALL_CONNECTED_PORTS="OFF" charge_pump_current_bits=1 clk0_counter="C0" device_family="Cyclone IV E" inclk0_input_frequency=20000 intended_device_family="Cyclone IV E" loop_filter_c_bits=0 loop_filter_r_bits=27 lpm_hint="CBX_MODULE_PREFIX=PLL" m=8 m_initial=1 m_ph=0 n=1 operation_mode="no_compensation" pll_type="AUTO" port_clk0="PORT_USED" port_clk1="PORT_UNUSED" port_clk2="PORT_UNUSED" port_clk3="PORT_UNUSED" port_clk4="PORT_UNUSED" port_clk5="PORT_UNUSED" port_extclk0="PORT_UNUSED" port_extclk1="PORT_UNUSED" port_extclk2="PORT_UNUSED" port_extclk3="PORT_UNUSED" port_inclk1="PORT_UNUSED" port_phasecounterselect="PORT_UNUSED" port_phasedone="PORT_UNUSED" port_scandata="PORT_USED" port_scandataout="PORT_USED" scan_chain_mif_file="PLL.mif" self_reset_on_loss_lock="OFF" vco_post_scale=2 width_clock=5 areset clk configupdate inclk locked scanclk scanclkena scandata scandataout scandone CARRY_CHAIN="MANUAL" CARRY_CHAIN_LENGTH=48
-//VERSION_BEGIN 10.1 cbx_altclkbuf 2010:11:29:22:18:02:SJ cbx_altiobuf_bidir 2010:11:29:22:18:02:SJ cbx_altiobuf_in 2010:11:29:22:18:02:SJ cbx_altiobuf_out 2010:11:29:22:18:02:SJ cbx_altpll 2010:11:29:22:18:02:SJ cbx_cycloneii 2010:11:29:22:18:02:SJ cbx_lpm_add_sub 2010:11:29:22:18:02:SJ cbx_lpm_compare 2010:11:29:22:18:02:SJ cbx_lpm_decode 2010:11:29:22:18:02:SJ cbx_lpm_mux 2010:11:29:22:18:02:SJ cbx_mgl 2010:11:29:22:19:52:SJ cbx_stratix 2010:11:29:22:18:02:SJ cbx_stratixii 2010:11:29:22:18:02:SJ cbx_stratixiii 2010:11:29:22:18:02:SJ cbx_stratixv 2010:11:29:22:18:02:SJ cbx_util_mgl 2010:11:29:22:18:02:SJ  VERSION_END
+//altpll c0_high=5 c0_initial=1 c0_low=5 c0_mode="EVEN" c0_ph=0 CBX_DECLARE_ALL_CONNECTED_PORTS="OFF" charge_pump_current_bits=1 clk0_counter="C0" device_family="Cyclone IV E" inclk0_input_frequency=20000 intended_device_family="Cyclone IV E" loop_filter_c_bits=0 loop_filter_r_bits=8 lpm_hint="CBX_MODULE_PREFIX=PLL" m=108 m_initial=1 m_ph=0 n=9 operation_mode="no_compensation" pll_type="AUTO" port_clk0="PORT_USED" port_clk1="PORT_UNUSED" port_clk2="PORT_UNUSED" port_clk3="PORT_UNUSED" port_clk4="PORT_UNUSED" port_clk5="PORT_UNUSED" port_extclk0="PORT_UNUSED" port_extclk1="PORT_UNUSED" port_extclk2="PORT_UNUSED" port_extclk3="PORT_UNUSED" port_inclk1="PORT_UNUSED" port_phasecounterselect="PORT_UNUSED" port_phasedone="PORT_UNUSED" port_scandata="PORT_USED" port_scandataout="PORT_USED" scan_chain_mif_file="PLL.mif" self_reset_on_loss_lock="OFF" vco_post_scale=2 width_clock=5 areset clk configupdate inclk locked scanclk scanclkena scandata scandataout scandone CARRY_CHAIN="MANUAL" CARRY_CHAIN_LENGTH=48
+//VERSION_BEGIN 12.0 cbx_altclkbuf 2012:05:31:20:08:35:SJ cbx_altiobuf_bidir 2012:05:31:20:08:35:SJ cbx_altiobuf_in 2012:05:31:20:08:35:SJ cbx_altiobuf_out 2012:05:31:20:08:35:SJ cbx_altpll 2012:05:31:20:08:35:SJ cbx_cycloneii 2012:05:31:20:08:35:SJ cbx_lpm_add_sub 2012:05:31:20:08:35:SJ cbx_lpm_compare 2012:05:31:20:08:35:SJ cbx_lpm_counter 2012:05:31:20:08:35:SJ cbx_lpm_decode 2012:05:31:20:08:35:SJ cbx_lpm_mux 2012:05:31:20:08:35:SJ cbx_mgl 2012:05:31:20:09:47:SJ cbx_stratix 2012:05:31:20:08:35:SJ cbx_stratixii 2012:05:31:20:08:35:SJ cbx_stratixiii 2012:05:31:20:08:35:SJ cbx_stratixv 2012:05:31:20:08:35:SJ cbx_util_mgl 2012:05:31:20:08:35:SJ  VERSION_END
 //CBXI_INSTANCE_NAME="SDR_REV_A_IF_SYNTH_if_synth_PLL_AND_RECONFIG_comb_3_PLL_pll_module_altpll_altpll_component"
 // synthesis VERILOG_INPUT_VERSION VERILOG_2001
 // altera message_off 10463
 
 
 
-// Copyright (C) 1991-2010 Altera Corporation
+// Copyright (C) 1991-2012 Altera Corporation
 //  Your use of Altera Corporation's design tools, logic functions 
 //  and other software and tools, and its AMPP partner logic 
 //  functions, and any output files from any of the foregoing 
@@ -26,7 +26,7 @@
 //synopsys translate_off
 `timescale 1 ps / 1 ps
 //synopsys translate_on
-(* ALTERA_ATTRIBUTE = {"SUPPRESS_DA_RULE_INTERNAL=C104"} *)
+(* ALTERA_ATTRIBUTE = {"SUPPRESS_DA_RULE_INTERNAL=C104;SUPPRESS_DA_RULE_INTERNAL=R101"} *)
 module  PLL_altpll
 	( 
 	areset,
@@ -109,20 +109,20 @@ module  PLL_altpll
 	`endif
 	);
 	defparam
-		pll1.c0_high = 3,
+		pll1.c0_high = 5,
 		pll1.c0_initial = 1,
-		pll1.c0_low = 2,
-		pll1.c0_mode = "odd",
+		pll1.c0_low = 5,
+		pll1.c0_mode = "even",
 		pll1.c0_ph = 0,
 		pll1.charge_pump_current_bits = 1,
 		pll1.clk0_counter = "c0",
 		pll1.inclk0_input_frequency = 20000,
 		pll1.loop_filter_c_bits = 0,
-		pll1.loop_filter_r_bits = 27,
-		pll1.m = 8,
+		pll1.loop_filter_r_bits = 8,
+		pll1.m = 108,
 		pll1.m_initial = 1,
 		pll1.m_ph = 0,
-		pll1.n = 1,
+		pll1.n = 9,
 		pll1.operation_mode = "no_compensation",
 		pll1.pll_type = "auto",
 		pll1.scan_chain_mif_file = "PLL.mif",

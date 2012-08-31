@@ -1,5 +1,5 @@
 PLL_Name	IF_SYNTH:if_synth|PLL_AND_RECONFIG:comb_3|PLL:pll_module|altpll:altpll_component|PLL_altpll:auto_generated|pll1
-PLLJITTER	41
+PLLJITTER	NA
 PLLSPEmax	84
 PLLSPEmin	-53
 
