@@ -22,3 +22,7 @@ simulation/
 *.qws
 *.sdc
 *.jdi
+*.qdf
+*.qip
+
+PLLJ_PLLSPE_INFO.txt

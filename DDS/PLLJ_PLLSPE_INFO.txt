@@ -1,5 +1,0 @@
-PLL_Name	DDS:lo_synth|DDS_PLL:dds_pll|altpll:altpll_component|DDS_PLL_altpll:auto_generated|pll1
-PLLJITTER	NA
-PLLSPEmax	84
-PLLSPEmin	-53
-
