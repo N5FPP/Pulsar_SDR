@@ -4,6 +4,242 @@
 		"selected_items":
 		[
 			[
+				"tx",
+				"tx_fifo_full"
+			],
+			[
+				"tx_fi",
+				"tx_fifo_rd"
+			],
+			[
+				"data",
+				"data"
+			],
+			[
+				"tx_fifo",
+				"tx_fifo_full"
+			],
+			[
+				"bcd",
+				"bcd_conv_done"
+			],
+			[
+				"f",
+				"fstate"
+			],
+			[
+				"DIGIT",
+				"DIGITS"
+			],
+			[
+				"lo",
+				"lo_strobe"
+			],
+			[
+				"wire",
+				"wire"
+			],
+			[
+				"fre",
+				"freq_bcd"
+			],
+			[
+				"Pll",
+				"PLL_C"
+			],
+			[
+				"PLL",
+				"PLL_K"
+			],
+			[
+				"pll",
+				"pll_clk"
+			],
+			[
+				"clk",
+				"clk_div"
+			],
+			[
+				"nco",
+				"nco_sin_out"
+			],
+			[
+				"in",
+				"inclk0x"
+			],
+			[
+				"n",
+				"nco_clkout"
+			],
+			[
+				"phase",
+				"phase_accum"
+			],
+			[
+				"count",
+				"counter_data"
+			],
+			[
+				"quad",
+				"quadrature_clk"
+			],
+			[
+				"pll_clk",
+				"pll_clkout"
+			],
+			[
+				"pll_cl",
+				"pll_clkin"
+			],
+			[
+				"tune",
+				"tune_step"
+			],
+			[
+				"up",
+				"up_pressed"
+			],
+			[
+				"dow",
+				"down_pressed"
+			],
+			[
+				"alw",
+				"always_f	always_ff"
+			],
+			[
+				"busy",
+				"pll_busy"
+			],
+			[
+				"lo_st",
+				"lo_strobe_rdy"
+			],
+			[
+				"coun",
+				"counter_param"
+			],
+			[
+				"udate",
+				"update_pll"
+			],
+			[
+				"counter",
+				"counter_data"
+			],
+			[
+				"scan",
+				"scandone"
+			],
+			[
+				"s",
+				"scandataout"
+			],
+			[
+				"sc",
+				"scanclk"
+			],
+			[
+				"tu",
+				"tune_dir"
+			],
+			[
+				"encoder",
+				"encoder_a"
+			],
+			[
+				"en",
+				"encoder_b"
+			],
+			[
+				"b",
+				"b_sync"
+			],
+			[
+				"nco_",
+				"nco_clk"
+			],
+			[
+				"nc",
+				"nco_lock"
+			],
+			[
+				"sample",
+				"sample_count"
+			],
+			[
+				"al",
+				"always_f	always_ff"
+			],
+			[
+				"last",
+				"last_bit_clk"
+			],
+			[
+				"sample_",
+				"sample_count"
+			],
+			[
+				"samp",
+				"sample_count"
+			],
+			[
+				"sam",
+				"sample_trig"
+			],
+			[
+				"sa",
+				"sample_trig"
+			],
+			[
+				"_sa",
+				"_sample_trig_prev"
+			],
+			[
+				"S",
+				"STOP1"
+			],
+			[
+				"ST",
+				"START"
+			],
+			[
+				"STOP",
+				"STOP1"
+			],
+			[
+				"rx",
+				"rx_done"
+			],
+			[
+				"RS",
+				"RS232_tx"
+			],
+			[
+				"da",
+				"data_buffer"
+			],
+			[
+				"always",
+				"always_f	always_ff"
+			],
+			[
+				"IDLE",
+				"IDLE"
+			],
+			[
+				"RS232",
+				"RS232_tx"
+			],
+			[
+				"tx_",
+				"tx_start"
+			],
+			[
+				"cl",
+				"clk_div"
+			],
+			[
 				"T",
 				"TextMap"
 			],
@@ -72,10 +308,6 @@
 				"writeFile"
 			],
 			[
-				"s",
-				"split"
-			],
-			[
 				"HE",
 				"HexMap"
 			],
@@ -132,14 +364,6 @@
 				"vertEn"
 			],
 			[
-				"count",
-				"counter"
-			],
-			[
-				"cl",
-				"CLK_DIV"
-			],
-			[
 				"HSY",
 				"HSYNC_END"
 			],
@@ -184,14 +408,6 @@
 				"horz_en"
 			],
 			[
-				"clk",
-				"CLOCK_50"
-			],
-			[
-				"lo",
-				"lo_clk"
-			],
-			[
 				"cou",
 				"counter_type"
 			],
@@ -200,20 +416,12 @@
 				"reconfig_busy"
 			],
 			[
-				"in",
-				"input"
-			],
-			[
 				"re",
 				"reconfig"
 			],
 			[
 				"down",
 				"down_button_press"
-			],
-			[
-				"up",
-				"up_button_press"
 			],
 			[
 				"pll_s",
@@ -240,62 +448,46 @@
 				"button_down"
 			],
 			[
-				"pll",
-				"pll_lock"
-			],
-			[
 				"_",
 				"_reset"
 			],
 			[
-				"data",
-				"data_out"
-			],
-			[
 				"if",
 				"if_freq"
-			],
-			[
-				"fre",
-				"freq_strobe"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "/C/Repositories/VGA_test/characters/char_ram_load.py",
-			"settings":
-			{
-				"buffer_size": 2129,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "//=======================================================\n//  This code tests the VGA signal generator module\n//\n//  Five output signals are to be connected to the\n//  corresponding pins on a VGA monitor\n//\n//  Copyright Lee Szuba 2012\n//=======================================================\n\n\nmodule VGA_test(\n\n    //////////// CLOCK //////////\n    CLOCK_50,\n\n    //////////// LED //////////\n    LED,\n\n    //////////// KEY //////////\n    KEY,\n\n    //////////// SW //////////\n    SW,\n\n    //////////// SDRAM //////////\n    DRAM_ADDR,\n    DRAM_BA,\n    DRAM_CAS_N,\n    DRAM_CKE,\n    DRAM_CLK,\n    DRAM_CS_N,\n    DRAM_DQ,\n    DRAM_DQM,\n    DRAM_RAS_N,\n    DRAM_WE_N,\n\n    //////////// ADC //////////\n    ADC_CS_N,\n    ADC_SADDR,\n    ADC_SCLK,\n    ADC_SDAT,\n\n    //////////// 2x13 GPIO Header //////////\n    GPIO_2,\n    GPIO_2_IN,\n\n    //////////// GPIO_0, GPIO_0 connect to GPIO Default //////////\n    GPIO_0,\n    GPIO_0_IN,\n\n    //////////// GPIO_1, GPIO_1 connect to GPIO Default //////////\n    GPIO_1,\n    GPIO_1_IN\n);\n\n//=======================================================\n//  PARAMETER declarations\n//=======================================================\n\n\n//=======================================================\n//  PORT declarations\n//=======================================================\n\n//////////// CLOCK //////////\ninput                       CLOCK_50;\n\n//////////// LED //////////\noutput           [7:0]      LED;\n\n//////////// KEY //////////\ninput            [1:0]      KEY;\n\n//////////// SW //////////\ninput            [3:0]      SW;\n\n//////////// SDRAM //////////\noutput          [12:0]      DRAM_ADDR;\noutput           [1:0]      DRAM_BA;\noutput                      DRAM_CAS_N;\noutput                      DRAM_CKE;\noutput                      DRAM_CLK;\noutput                      DRAM_CS_N;\ninout           [15:0]      DRAM_DQ;\noutput           [1:0]      DRAM_DQM;\noutput                      DRAM_RAS_N;\noutput                      DRAM_WE_N;\n\n//////////// ADC //////////\noutput                      ADC_CS_N;\noutput                      ADC_SADDR;\noutput                      ADC_SCLK;\ninput                       ADC_SDAT;\n\n//////////// 2x13 GPIO Header //////////\ninout           [12:0]      GPIO_2;\ninput            [2:0]      GPIO_2_IN;\n\n//////////// GPIO_0, GPIO_0 connect to GPIO Default //////////\ninout           [33:0]      GPIO_0;\ninput            [1:0]      GPIO_0_IN;\n\n//////////// GPIO_1, GPIO_1 connect to GPIO Default //////////\ninout           [33:0]      GPIO_1;\ninput            [1:0]      GPIO_1_IN;\n\n\n//=======================================================\n//  REG/WIRE declarations\n//=======================================================\n\nparameter TEXT_H_START = 20,\n          TEXT_V_START = 10;\n\n\nwire clk = CLOCK_50;\nwire beat_out;\n\n//=======================================================\n//  Structural coding\n//=======================================================\n\nHEARTBEAT heartbeat(.clk(clk), .beat_out(beat_out));\n\nassign LED[7] = beat_out;\n\n\n\nVGA vga(.clk(clk),\n        .red(GPIO_0[19]),\n        .green(GPIO_0[21]),\n        .blue(GPIO_0[23]),\n        .h_sync(GPIO_0[17]),\n        .v_sync(GPIO_0[15]),\n        .char_data(/*char*/0),\n        .char_h_addr(/*char_x + TEXT_H_START*/0),\n        .char_v_addr(/*char_y + TEXT_V_START*/0),\n        .char_wren(wren));\n\nendmodule\n",
-			"file": "/C/Repositories/VGA_test/VGA_test.v",
-			"file_size": 3502,
-			"file_write_time": 129861057460530837,
-			"settings":
-			{
-				"buffer_size": 3342,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Repositories/VGA_test/characters/static_text.map",
-			"settings":
-			{
-				"buffer_size": 957,
-				"line_ending": "Windows",
-				"name": "#"
-			}
-		},
-		{
 			"file": "SDR_REV_A.v",
 			"settings":
 			{
-				"buffer_size": 4893,
+				"buffer_size": 5479,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "CAT_CMD_GEN/BCD_TO_ASCII.v",
+			"settings":
+			{
+				"buffer_size": 582,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "CAT_CMD_GEN/CAT_TX_STATE_MACHINE.v",
+			"settings":
+			{
+				"buffer_size": 2896,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "CAT_CMD_GEN/FREQ_CALC.v",
+			"settings":
+			{
+				"buffer_size": 1375,
 				"line_ending": "Windows"
 			}
 		}
@@ -332,6 +524,65 @@
 	},
 	"file_history":
 	[
+		"/C/Repositories/Pulsar_SDR/CAT_TX_STATE_MACHINE.v",
+		"/C/Repositories/Pulsar_SDR/RECONFIG_STATE_MACHINE.v",
+		"/C/Repositories/Pulsar_SDR/DDS.v",
+		"/C/Repositories/Pulsar_SDR/TX_MODULE.v",
+		"/C/Repositories/Pulsar_SDR/FREQ_CALC.v",
+		"/C/Repositories/Pulsar_SDR/BCD_TO_ASCII.v",
+		"/C/Repositories/Pulsar_SDR/SDR_REV_A.v",
+		"/C/Repositories/Pulsar_SDR/simulation/modelsim/HEARTBEAT_TB.v",
+		"/C/Repositories/Pulsar_SDR/HEARTBEAT.v",
+		"/C/Repositories/Pulsar_SDR/FREQ_MULT_CALC.v",
+		"/C/Repositories/Pulsar_SDR/NCO.v",
+		"/C/Repositories/Pulsar_SDR/IF_SYNTH.v",
+		"/C/Repositories/Pulsar_SDR/TX_FIFO_bb.v",
+		"/C/Repositories/Pulsar_SDR/DDS_PLL.mif",
+		"/C/Repositories/Pulsar_SDR/BIN_TO_BCD.v",
+		"/C/Repositories/Pulsar_SDR/NCO_old.v",
+		"/C/Repositories/Pulsar_SDR/FREQ_SYNTH_bb.v",
+		"/C/Repositories/Pulsar_SDR/FREQ_SYNTH.v",
+		"/C/Repositories/Pulsar_SDR/DDS_PLL_RECONFIG.v",
+		"/C/Repositories/Pulsar_SDR/DDS_PLL.v",
+		"/C/Repositories/Pulsar_SDR/DDS_PLL_RECONFIG_bb.v",
+		"/C/Repositories/Pulsar_SDR/DDS_PLL_bb.v",
+		"/C/Users/owner/AppData/Local/Temp/Temp1_binarytobcd.zip/binarytobcd/digit.vhd",
+		"/C/Users/owner/AppData/Local/Temp/Temp1_binarytobcd.zip/binarytobcd/bcdconv.vhd",
+		"/C/Repositories/Pulsar_SDR/FONT_ROM_bb.v",
+		"/C/Repositories/Pulsar_SDR/FREQ_SYNTH.html",
+		"/C/Repositories/Pulsar_SDR/CLK_BUF.v",
+		"/C/Repositories/Pulsar_SDR/CLKCTRL.v",
+		"/C/Repositories/Pulsar_SDR/QUAD_GEN.v",
+		"/C/Repositories/Pulsar_SDR/FONT_ROM.v",
+		"/C/Repositories/Pulsar_SDR/TX_UART.v",
+		"/C/Repositories/Pulsar_SDR/RX_UART.v",
+		"/C/Repositories/Pulsar_SDR/QUAD_DECODER.v",
+		"/C/Repositories/Pulsar_SDR/DDS_PLL.ppf",
+		"/C/Users/owner/Downloads/cm-unicode-0.7.0-ttf/cm-unicode-0.7.0/INSTALL",
+		"/C/Users/owner/Downloads/cm-unicode-0.7.0-ttf/cm-unicode-0.7.0/README",
+		"/C/Repositories/Pulsar_SDR/rs232_example/async_transmitter.v",
+		"/C/Repositories/Pulsar_SDR/rs232_example/async_receiver.v",
+		"/C/Repositories/Pulsar_SDR/RX_UART_TEST.v",
+		"/C/Repositories/Pulsar_SDR/sim/RX_TEST.v",
+		"/C/Repositories/Pulsar_SDR/rx_uart.v.bak",
+		"/C/Users/owner/Music/iTunes/iTunes Media/Automatically Add to iTunes/SONY Vegas Pro 11.0 Build 370 + Patch (32-bit) [RH]/SONY Vegas Pro 11.0 Build 370/!Read.First.Or.Fail.Later!.txt",
+		"/C/Repositories/VGA_test/characters/static_text.map",
+		"/C/Repositories/VGA_test/VGA_test.v",
+		"/C/Repositories/VGA_test/characters/char_ram_load.py",
+		"/C/Repositories/Pulsar_SDR/TX_UART",
+		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/owner/AppData/Local/Temp/Temp1_async.zip/com.c",
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_Nano_SOPC_DEMO/jtag_uart.v",
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_Nano_SOPC_DEMO/epcs.v",
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_Nano_SOPC_DEMO/DE0_Nano_SOPC.v",
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_Nano_SOPC_DEMO/DE0_Nano.v",
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_GSensor/v/spi_param.h",
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_GSensor/DE0_NANO_G_Sensor.v",
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_default/DE0_NANO.v",
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/DE0_NANO.v",
+		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/ADC_CTRL.v",
+		"/C/Repositories/Pulsar_SDR/PLL_AND_RECONFIG.v",
 		"/C/Repositories/VGA_test/characters/chars.map",
 		"/C/Users/owner/Documents/iClicker/factory_eeprom.hex",
 		"/C/Users/owner/Dropbox/iclicker-project/iClicker.asm",
@@ -342,7 +593,6 @@
 		"/C/Repositories/Pulsar_SDR/VGA.v",
 		"/C/Repositories/VGA_test/VGA.v",
 		"/C/Repositories/VGA_test/SYNC_GEN.v",
-		"/C/Repositories/VGA_test/characters/char_ram_load.py",
 		"/C/Repositories/VGA_test/characters/character_rom.mif",
 		"/C/Repositories/VGA_test/FONT_ROM.v",
 		"/C/Repositories/VGA_test/CHAR_RAM_bb.v",
@@ -351,11 +601,8 @@
 		"/C/Users/owner/Documents/iClicker/AVR asm/AVR asm/rapidfire asm/gistfile1.asm",
 		"/C/Users/owner/Documents/iClicker/factory_eeprom_b.hex",
 		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/User/verilog.sublime-settings",
-		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/C/Users/owner/AppData/Roaming/Sublime Text 2/Packages/User/JSON.sublime-settings",
 		"/C/Repositories/VGA_test/VGA_old.v",
-		"/C/Repositories/Pulsar_SDR/HEARTBEAT.v",
 		"/C/Repositories/VGA_test/characters/test_output.txt",
 		"/C/Repositories/VGA_test/characters/test_input.txt",
 		"/C/Repositories/VGA_test/fontrom.mif",
@@ -369,16 +616,10 @@
 		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_Nano_SOPC_DEMO/ip/TERASIC_ADC_READ/TERASIC_ADC_READ.v",
 		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_Nano_SOPC_DEMO/sdram.v",
 		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_Nano_GOLDEN_TOP/DE0_Nano.v",
-		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_default/DE0_NANO.v",
-		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/ADC_CTRL.v",
-		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/DE0_NANO.v",
 		"/C/fpga/Heartbeat/tb_heartbeat.vhd",
 		"/C/fpga/Heartbeat/HeartBeat.vhd",
 		"/C/Repositories/Pulsar_SDR/FIFO.v",
-		"/C/Repositories/Pulsar_SDR/PLL_AND_RECONFIG.v",
-		"/C/Repositories/Pulsar_SDR/SDR_REV_A.v",
 		"/C/Repositories/Pulsar_SDR/DEBOUNCER.v",
-		"/C/Repositories/Pulsar_SDR/IF_SYNTH.v",
 		"/C/Users/owner/Documents/DEO_Nano/Demonstration/DE0_NANO_ADC/SPIPLL.v",
 		"/C/Repositories/Pulsar_SDR/IF_CLK.v",
 		"/C/Repositories/Pulsar_SDR/PLL.v",
@@ -408,6 +649,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"clock",
+			"clock\n",
+			";\n",
 			"fontRomOut",
 			"colour",
 			"pix",
@@ -424,6 +668,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"clk",
 			"charLine"
 		],
 		"reverse": false,
@@ -435,85 +680,29 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/C/Repositories/VGA_test/characters/char_ram_load.py",
+					"file": "SDR_REV_A.v",
 					"settings":
 					{
-						"buffer_size": 2129,
+						"buffer_size": 5479,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1090,
-								1090
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/Repositories/VGA_test/VGA_test.v",
-					"settings":
-					{
-						"buffer_size": 3342,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3012,
-								3012
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Verilog/verilog.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1638.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/C/Repositories/VGA_test/characters/static_text.map",
-					"settings":
-					{
-						"buffer_size": 957,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								725,
-								725
-							]
-						],
-						"settings":
-						{
-							"auto_name": "#",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/SystemVerilog/SystemVerilog.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -528,28 +717,85 @@
 			"sheets":
 			[
 				{
-					"buffer": 3,
-					"file": "SDR_REV_A.v",
+					"buffer": 1,
+					"file": "CAT_CMD_GEN/BCD_TO_ASCII.v",
 					"settings":
 					{
-						"buffer_size": 4893,
+						"buffer_size": 582,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4609,
-								4609
+								355,
+								355
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/SystemVerilog/SystemVerilog.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3100.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "CAT_CMD_GEN/CAT_TX_STATE_MACHINE.v",
+					"settings":
+					{
+						"buffer_size": 2896,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SystemVerilog/SystemVerilog.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "CAT_CMD_GEN/FREQ_CALC.v",
+					"settings":
+					{
+						"buffer_size": 1375,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SystemVerilog/SystemVerilog.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 504.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -563,7 +809,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 34.0
 	},
 	"layout":
 	{
@@ -585,7 +831,7 @@
 		"cols":
 		[
 			0.0,
-			0.466608221312,
+			0.442422556381,
 			1.0
 		],
 		"rows":
@@ -620,6 +866,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 224.0,
 	"status_bar_visible": true
 }

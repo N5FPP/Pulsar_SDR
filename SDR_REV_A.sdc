@@ -7,6 +7,7 @@
 # Create Clock
 #**************************************************************
 create_clock -period 20 [get_ports CLOCK_50]
+create_clock -period 166.666 [get_ports B_IN[1]]
 
 #**************************************************************
 # Create Generated Clock

@@ -1,0 +1,22 @@
+
+State Machine - |SDR_REV_A|TX_MODULE:tx_module|TX_UART:tx_uart|state
+Name state.STOP state.START state.IDLE state.00000111 state.00000110 state.00000101 state.00000100 state.00000011 state.00000010 state.00000001 state.00000000 
+state.00000000 0 0 0 0 0 0 0 0 0 0 0 
+state.00000001 0 0 0 0 0 0 0 0 0 1 1 
+state.00000010 0 0 0 0 0 0 0 0 1 0 1 
+state.00000011 0 0 0 0 0 0 0 1 0 0 1 
+state.00000100 0 0 0 0 0 0 1 0 0 0 1 
+state.00000101 0 0 0 0 0 1 0 0 0 0 1 
+state.00000110 0 0 0 0 1 0 0 0 0 0 1 
+state.00000111 0 0 0 1 0 0 0 0 0 0 1 
+state.IDLE 0 0 1 0 0 0 0 0 0 0 1 
+state.START 0 1 0 0 0 0 0 0 0 0 1 
+state.STOP 1 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |SDR_REV_A|DDS:lo_synth|RECONFIG_STATE_MACHINE:reconfig_state_machine|fstate
+Name fstate.WRITE_PARAMS fstate.START_RECONFIG fstate.RECONFIG fstate.IDLE fstate.START_UPDATE 
+fstate.IDLE 0 0 0 0 0 
+fstate.RECONFIG 0 0 1 1 0 
+fstate.START_RECONFIG 0 1 0 1 0 
+fstate.WRITE_PARAMS 1 0 0 1 0 
+fstate.START_UPDATE 0 0 0 1 1 

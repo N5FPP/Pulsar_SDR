@@ -1,2 +1,4 @@
-Warning (10268): Verilog HDL information at SDR_REV_A.v(122): always construct contains both blocking and non-blocking assignments
-Warning (10268): Verilog HDL information at SDR_REV_A.v(133): always construct contains both blocking and non-blocking assignments
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (10281): Verilog HDL Declaration information at TX_UART.v(11): object "start" differs only in case from object "START" in the same scope
+Info (10281): Verilog HDL Declaration information at RECONFIG_STATE_MACHINE.v(22): object "reconfig" differs only in case from object "RECONFIG" in the same scope
+Info (10281): Verilog HDL Declaration information at CAT_TX_STATE_MACHINE.v(13): object "done" differs only in case from object "DONE" in the same scope
