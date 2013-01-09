@@ -1,5 +1,0 @@
-Warning (20028): Parallel compilation is not licensed and has been disabled
-Warning (292013): Feature LogicLock is only available with a valid subscription license. You can purchase a software subscription to gain full access to this feature.
-Warning (169180): Following 1 pins must use external clamping diodes.
-Warning (169177): 95 pins must meet Altera requirements for 3.3-, 3.0-, and 2.5-V interfaces. For more information, refer to AN 447: Interfacing Cyclone IV E Devices with 3.3/3.0/2.5-V LVTTL/LVCMOS I/O Systems.
-Warning (169203): PCI-clamp diode is not supported in this mode. The following 1 pins must meet the Altera requirements for 3.3V, 3.0V, and 2.5V interfaces if they are connected to devices other than the supported configuration devices. In these cases, Altera recommends termination method as specified in the Application Note 447.
