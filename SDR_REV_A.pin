@@ -76,8 +76,8 @@ A[8]                         : A5        : bidir  : 3.3-V LVTTL       :         
 A[11]                        : A6        : bidir  : 3.3-V LVTTL       :         : 8         : Y              
 A[14]                        : A7        : bidir  : 3.3-V LVTTL       :         : 8         : Y              
 A_IN[0]                      : A8        : input  : 3.3-V LVTTL       :         : 8         : Y              
-GND+                         : A9        :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : A10       :        :                   :         : 7         :                
+ADC_SDAT                     : A9        : input  : 3.3-V LVTTL       :         : 7         : Y              
+ADC_CS_N                     : A10       : output : 3.3-V LVTTL       :         : 7         : Y              
 LED[3]                       : A11       : output : 3.3-V LVTTL       :         : 7         : Y              
 A[30]                        : A12       : bidir  : 3.3-V LVTTL       :         : 7         : Y              
 LED[1]                       : A13       : output : 3.3-V LVTTL       :         : 7         : Y              
@@ -93,11 +93,11 @@ A[10]                        : B6        : bidir  : 3.3-V LVTTL       :         
 A[12]                        : B7        : bidir  : 3.3-V LVTTL       :         : 8         : Y              
 A_IN[1]                      : B8        : input  : 3.3-V LVTTL       :         : 8         : Y              
 SW[2]                        : B9        : input  : 3.3-V LVTTL       :         : 7         : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : B10       :        :                   :         : 7         :                
+ADC_SADDR                    : B10       : output : 3.3-V LVTTL       :         : 7         : Y              
 A[29]                        : B11       : bidir  : 3.3-V LVTTL       :         : 7         : Y              
 A[33]                        : B12       : bidir  : 3.3-V LVTTL       :         : 7         : Y              
 LED[2]                       : B13       : output : 3.3-V LVTTL       :         : 7         : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : B14       :        :                   :         : 7         :                
+ADC_SCLK                     : B14       : output : 3.3-V LVTTL       :         : 7         : Y              
 GND                          : B15       : gnd    :                   :         :           :                
 GPIO_2[1]                    : B16       : bidir  : 3.3-V LVTTL       :         : 6         : Y              
 EPCS_ASDO                    : C1        : output : 3.3-V LVTTL       :         : 1         : Y              

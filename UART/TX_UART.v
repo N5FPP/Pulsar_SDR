@@ -7,11 +7,13 @@
 //=======================================================
 
 
-module TX_UART( input        clk,
-                input        start,
-                input  [7:0] data,
-                output       busy,
-                output       tx );
+module TX_UART(
+    input        clk,
+    input        start,
+    input  [7:0] data,
+    output       busy,
+    output       tx
+);
 
     // clk
     // Main system clock
@@ -32,7 +34,9 @@ module TX_UART( input        clk,
 
 
     // Baud generator
-    parameter DIV = 5208;
+    // 9600  -> 5208  (Tested)
+    //115200 -> 434   (Tested)
+    parameter DIV = 434;
 
     reg [15:0] clk_div;
     reg bit_clk;
@@ -94,19 +98,19 @@ module TX_UART( input        clk,
     end
 
     reg _tx;
-    always @(state or _data) begin
+    always @(*) begin
         case (state)
-            IDLE: _tx <= MARK;
-            START: _tx <= SPACE;
-            STOP: _tx <= MARK;
-            0: _tx <= _data[0];
-            1: _tx <= _data[1];
-            2: _tx <= _data[2];
-            3: _tx <= _data[3];
-            4: _tx <= _data[4];
-            5: _tx <= _data[5];
-            6: _tx <= _data[6];
-            7: _tx <= _data[7];
+            IDLE:    _tx <= MARK;
+            START:   _tx <= SPACE;
+            STOP:    _tx <= MARK;
+            0:       _tx <= _data[0];
+            1:       _tx <= _data[1];
+            2:       _tx <= _data[2];
+            3:       _tx <= _data[3];
+            4:       _tx <= _data[4];
+            5:       _tx <= _data[5];
+            6:       _tx <= _data[6];
+            7:       _tx <= _data[7];
             default: _tx <= MARK;
         endcase
     end
@@ -116,5 +120,5 @@ module TX_UART( input        clk,
 
 
     // Invert the data signal to match the hardware implementation if required
-    assign tx = ~_tx;
+    assign tx = _tx;
 endmodule

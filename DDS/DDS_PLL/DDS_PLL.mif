@@ -17,8 +17,8 @@
 --    Device Part: -
 --    Device Speed Grade: 6
 --    PLL Scan Chain: Fast PLL (144 bits)
---    File Name: C:/Repositories/Pulsar_SDR//DDS_PLL.mif
---    Generated: Sun Dec 02 21:21:08 2012
+--    File Name: C:/Repositories/Pulsar_SDR/DDS/DDS_PLL//DDS_PLL.mif
+--    Generated: Tue Apr 30 22:33:44 2013
 
 WIDTH=1;
 DEPTH=144;

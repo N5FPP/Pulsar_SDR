@@ -8,7 +8,7 @@ Quartus II to load into a character ROM
 The script will also hopefully support Intel Hex files eventually
 
 Copyright Lee Szuba 2012
-""" 
+"""
 
 import sys
 
@@ -20,7 +20,7 @@ inName = sys.argv[1]
 outName = sys.argv[2]
 
 print("Input file:  ", inName)
-print("Output file: ", outName) 
+print("Output file: ", outName)
 
 HexMap = open(outName, 'w')
 CharMap = open(inName, 'r')

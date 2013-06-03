@@ -33,7 +33,7 @@
 //applicable agreement for further details.
 
 
-//altpll_reconfig CBX_AUTO_BLACKBOX="ALL" device_family="Cyclone IV E" init_from_rom="NO" scan_init_file="C:/Repositories/Pulsar_SDR/DDS_PLL.mif" busy clock counter_param counter_type data_in data_out pll_areset pll_areset_in pll_configupdate pll_scanclk pll_scanclkena pll_scandata pll_scandataout pll_scandone read_param reconfig reset write_param
+//altpll_reconfig CBX_AUTO_BLACKBOX="ALL" device_family="Cyclone IV E" init_from_rom="NO" scan_init_file="C:/Repositories/Pulsar_SDR/DDS/DDS_PLL/DDS_PLL.mif" busy clock counter_param counter_type data_in data_out pll_areset pll_areset_in pll_configupdate pll_scanclk pll_scanclkena pll_scandata pll_scandataout pll_scandone read_param reconfig reset write_param
 //VERSION_BEGIN 12.0 cbx_altpll_reconfig 2012:05:31:20:08:35:SJ cbx_altsyncram 2012:05:31:20:08:35:SJ cbx_cycloneii 2012:05:31:20:08:35:SJ cbx_lpm_add_sub 2012:05:31:20:08:35:SJ cbx_lpm_compare 2012:05:31:20:08:35:SJ cbx_lpm_counter 2012:05:31:20:08:35:SJ cbx_lpm_decode 2012:05:31:20:08:35:SJ cbx_lpm_mux 2012:05:31:20:08:35:SJ cbx_mgl 2012:05:31:20:09:47:SJ cbx_stratix 2012:05:31:20:08:35:SJ cbx_stratixii 2012:05:31:20:08:35:SJ cbx_stratixiii 2012:05:31:20:08:35:SJ cbx_stratixv 2012:05:31:20:08:35:SJ cbx_util_mgl 2012:05:31:20:08:35:SJ  VERSION_END
 // synthesis VERILOG_INPUT_VERSION VERILOG_2001
 // altera message_off 10463
@@ -44,7 +44,7 @@
 `timescale 1 ps / 1 ps
 //synopsys translate_on
 (* ALTERA_ATTRIBUTE = {"ADV_NETLIST_OPT_ALLOWED=\"NEVER_ALLOW\";suppress_da_rule_internal=C106;{-to le_comb10} PLL_SCAN_RECONFIG_COUNTER_REMAP_LCELL=2;{-to le_comb8} PLL_SCAN_RECONFIG_COUNTER_REMAP_LCELL=0;{-to le_comb9} PLL_SCAN_RECONFIG_COUNTER_REMAP_LCELL=1"} *)
-module  DDS_PLL_RECONFIG_pllrcfg_d711
+module  DDS_PLL_RECONFIG_pllrcfg_8b21
 	( 
 	busy,
 	clock,
@@ -325,7 +325,7 @@ module  DDS_PLL_RECONFIG_pllrcfg_d711
 	`endif
 	);
 	defparam
-		altsyncram4.init_file = "C:/Repositories/Pulsar_SDR/DDS_PLL.mif",
+		altsyncram4.init_file = "C:/Repositories/Pulsar_SDR/DDS/DDS_PLL/DDS_PLL.mif",
 		altsyncram4.numwords_a = 144,
 		altsyncram4.operation_mode = "SINGLE_PORT",
 		altsyncram4.width_a = 1,
@@ -1318,7 +1318,7 @@ module  DDS_PLL_RECONFIG_pllrcfg_d711
 		width_decoder_out = ((((({5{1'b0}} | {width_decoder_select[2], {3{1'b0}}, width_decoder_select[2]}) | {{4{1'b0}}, width_decoder_select[3]}) | {{2{1'b0}}, {3{width_decoder_select[5]}}}) | {{3{1'b0}}, width_decoder_select[6], 1'b0}) | {{2{1'b0}}, width_decoder_select[7], {2{1'b0}}}),
 		width_decoder_select = {((sel_type_cplf & sel_param_low_r) | (sel_type_cplf & sel_param_odd_CP_unused)), (sel_type_cplf & sel_param_high_i_postscale), ((((((((((((((sel_type_n & sel_param_high_i_postscale) | (sel_type_n & sel_param_low_r)) | (sel_type_m & sel_param_high_i_postscale)) | (sel_type_m & sel_param_low_r)) | (sel_type_c0 & sel_param_high_i_postscale)) | (sel_type_c0 & sel_param_low_r)) | (sel_type_c1 & sel_param_high_i_postscale)) | (sel_type_c1 & sel_param_low_r)) | (sel_type_c2 & sel_param_high_i_postscale)) | (sel_type_c2 & sel_param_low_r)) | (sel_type_c3 & sel_param_high_i_postscale)) | (sel_type_c3 & sel_param_low_r)) | (sel_type_c4 & sel_param_high_i_postscale)) | (sel_type_c4 & sel_param_low_r)), w1592w, ((sel_type_cplf & sel_param_bypass_LF_unused) | (sel_type_cplf & sel_param_c)), ((sel_type_n & sel_param_nominal_count) | (sel_type_m & sel_param_nominal_count)), w1565w, (((((((((((((((sel_type_vco & sel_param_high_i_postscale) | (sel_type_n & sel_param_bypass_LF_unused)) | (sel_type_n & sel_param_odd_CP_unused)) | (sel_type_m & sel_param_bypass_LF_unused)) | (sel_type_m & sel_param_odd_CP_unused)) | (sel_type_c0 & sel_param_bypass_LF_unused)) | (sel_type_c0 & sel_param_odd_CP_unused)) | (sel_type_c1 & sel_param_bypass_LF_unused)) | (sel_type_c1 & sel_param_odd_CP_unused)) | (sel_type_c2 & sel_param_bypass_LF_unused)) | (sel_type_c2 & sel_param_odd_CP_unused)) | (sel_type_c3 & sel_param_bypass_LF_unused)) | (sel_type_c3 & sel_param_odd_CP_unused)) | (sel_type_c4 & sel_param_bypass_LF_unused)) | (sel_type_c4 & sel_param_odd_CP_unused))},
 		write_from_rom = 1'b0;
-endmodule //DDS_PLL_RECONFIG_pllrcfg_d711
+endmodule //DDS_PLL_RECONFIG_pllrcfg_8b21
 //VALID FILE
 
 
@@ -1386,7 +1386,7 @@ module DDS_PLL_RECONFIG (
 	wire  busy = sub_wire5;
 	wire  pll_areset = sub_wire6;
 
-	DDS_PLL_RECONFIG_pllrcfg_d711	DDS_PLL_RECONFIG_pllrcfg_d711_component (
+	DDS_PLL_RECONFIG_pllrcfg_8b21	DDS_PLL_RECONFIG_pllrcfg_8b21_component (
 				.counter_param (counter_param),
 				.data_in (data_in),
 				.counter_type (counter_type),
@@ -1406,7 +1406,7 @@ module DDS_PLL_RECONFIG (
 				.busy (sub_wire5),
 				.pll_areset (sub_wire6))/* synthesis synthesis_clearbox=2
 	 clearbox_macroname = altpll_reconfig
-	 clearbox_defparam = "init_from_rom=NO;intended_device_family=Cyclone IV E;scan_init_file=C:/Repositories/Pulsar_SDR/DDS_PLL.mif;" */;
+	 clearbox_defparam = "init_from_rom=NO;intended_device_family=Cyclone IV E;scan_init_file=C:/Repositories/Pulsar_SDR/DDS/DDS_PLL/DDS_PLL.mif;" */;
 
 endmodule
 
@@ -1414,13 +1414,13 @@ endmodule
 // CNX file retrieval info
 // ============================================================
 // Retrieval info: PRIVATE: CHAIN_TYPE NUMERIC "0"
-// Retrieval info: PRIVATE: INIT_FILE_NAME STRING "C:/Repositories/Pulsar_SDR/DDS_PLL.mif"
+// Retrieval info: PRIVATE: INIT_FILE_NAME STRING "C:/Repositories/Pulsar_SDR/DDS/DDS_PLL/DDS_PLL.mif"
 // Retrieval info: PRIVATE: INTENDED_DEVICE_FAMILY STRING "Cyclone IV E"
 // Retrieval info: PRIVATE: SYNTH_WRAPPER_GEN_POSTFIX STRING "0"
 // Retrieval info: PRIVATE: USE_INIT_FILE STRING "1"
 // Retrieval info: CONSTANT: INIT_FROM_ROM STRING "NO"
 // Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "Cyclone IV E"
-// Retrieval info: CONSTANT: SCAN_INIT_FILE STRING "C:/Repositories/Pulsar_SDR/DDS_PLL.mif"
+// Retrieval info: CONSTANT: SCAN_INIT_FILE STRING "C:/Repositories/Pulsar_SDR/DDS/DDS_PLL/DDS_PLL.mif"
 // Retrieval info: USED_PORT: busy 0 0 0 0 OUTPUT NODEFVAL "busy"
 // Retrieval info: USED_PORT: clock 0 0 0 0 INPUT NODEFVAL "clock"
 // Retrieval info: USED_PORT: counter_param 0 0 3 0 INPUT NODEFVAL "counter_param[2..0]"
@@ -1462,7 +1462,7 @@ endmodule
 // Retrieval info: GEN_FILE: TYPE_NORMAL DDS_PLL_RECONFIG.cmp FALSE
 // Retrieval info: GEN_FILE: TYPE_NORMAL DDS_PLL_RECONFIG.bsf FALSE
 // Retrieval info: GEN_FILE: TYPE_NORMAL DDS_PLL_RECONFIG_inst.v FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL DDS_PLL_RECONFIG_bb.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL DDS_PLL_RECONFIG_bb.v FALSE
 // Retrieval info: LIB_FILE: altera_mf
 // Retrieval info: LIB_FILE: cycloneive
 // Retrieval info: LIB_FILE: lpm
