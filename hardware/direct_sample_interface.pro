@@ -1,6 +1,6 @@
-update=05/05/2013 1:08:16 AM
+update=17/06/2013 12:07:30 AM
 version=1
-last_client=cvpcb
+last_client=pcbnew
 [eeschema]
 version=1
 LibDir=C:/Repositories/pcb_lib
@@ -43,14 +43,19 @@ LibName30=valves
 LibName31=pcb_lib
 [general]
 version=1
+[cvpcb]
+version=1
+NetIExt=net
+[cvpcb/libraries]
+EquName1=devcms
 [pcbnew]
 version=1
 LastNetListRead=direct_sample_interface.net
 UseCmpFile=1
-PadDrill=1.750000000000
-PadDrillOvalY=1.750000000000
-PadSizeH=1.750000000000
-PadSizeV=1.750000000000
+PadDrill=0.000000000000
+PadDrillOvalY=0.000000000000
+PadSizeH=7.620000000000
+PadSizeV=3.810000000000
 PcbTextSizeV=1.500000000000
 PcbTextSizeH=1.500000000000
 PcbTextThickness=0.300000000000
@@ -59,10 +64,11 @@ ModuleTextSizeH=1.000000000000
 ModuleTextSizeThickness=0.150000000000
 SolderMaskClearance=0.000000000000
 SolderMaskMinWidth=0.000000000000
-DrawSegmentWidth=0.200000000000
+DrawSegmentWidth=0.355600000000
 BoardOutlineThickness=0.100000000000
 ModuleOutlineThickness=0.150000000000
 [pcbnew/libraries]
+LibDir=C:/Repositories/pcb_lib
 LibName1=sockets
 LibName2=connect
 LibName3=discret
@@ -80,9 +86,5 @@ LibName14=dip_sockets
 LibName15=pga_sockets
 LibName16=valves
 LibName17=lee_pcb_lib
-LibDir=C:/Repositories/pcb_lib
-[cvpcb]
-version=1
-NetIExt=net
-[cvpcb/libraries]
-EquName1=devcms
+LibName18=temp_ltc2208
+LibName19=logo
